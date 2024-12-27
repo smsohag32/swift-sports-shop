@@ -129,9 +129,9 @@ const Header = () => {
                         <Menu className="h-5 w-5" />
                      </Button>
                   </SheetTrigger>
-                  <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-[#0066CC]">
+                  <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-whiteBg">
                      <SheetHeader>
-                        <SheetTitle className="text-[#FF4500]">Menu</SheetTitle>
+                        <Logo className='w-44' />
                      </SheetHeader>
                      <nav className="mt-8">
                         {navItems.map((item) => (
@@ -154,7 +154,7 @@ const Header = () => {
                               </motion.span>
                            </NavLink>
                         ))}
-                        <Button variant="outline" size="sm" className="mt-4 w-full flex items-center justify-center space-x-2  hover:text-[#FF4500] hover:border-[#FF4500]">
+                        <Button variant="outline" size="sm" className="mt-8 w-full flex items-center justify-center space-x-2  hover:text-[#FF4500] hover:border-[#FF4500]">
                            <LogIn className="h-4 w-4" />
                            <span>Sign In</span>
                         </Button>
