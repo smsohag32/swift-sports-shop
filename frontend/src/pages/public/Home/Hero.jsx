@@ -13,7 +13,7 @@ const Hero = () => {
             <AnimatedIcon Icon={Basketball} className="bottom-0 right-10" />
             <AnimatedIcon Icon={Tennis} className="top-5 right-0" />
             <AnimatedIcon Icon={Soccer} className=" left-2/3" />
-            <motion.div
+         <motion.div
                initial={{ opacity: 0, x: -50 }}
                animate={{ opacity: 1, x: 0 }}
                transition={{ duration: 0.8 }}

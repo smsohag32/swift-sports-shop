@@ -51,6 +51,8 @@ export default {
                5: "hsl(var(--chart-5))",
             },
             lemagreen: "#32CD32",
+            title: "#232323",
+            des: "#4D4D4D",
             whiteBg: "#FFFFFF",
             grayWhite: "#727272",
             primaryOrange: "#FF7F00",
