@@ -6,7 +6,7 @@ import { Star } from "lucide-react";
 const ProductSection = () => {
    return (
       <section className="py-16">
-         <div className="container mx-auto px-4">
+         <div className="main-container">
 
             <h2 className=" text-2xl lg:text-[36px] text-title  font-medium text-center mb-12">Featured Products</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">

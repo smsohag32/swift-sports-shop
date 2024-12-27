@@ -6,10 +6,9 @@ import { ShoppingCart, TrendingUp, Award, Zap, ShoppingBasketIcon as Basketball 
 import heroSports from "@/assets/sports/image.webp"
 const Hero = () => {
    return (
-      <div className=" min-h-[calc(100vh-100px)]  flex items-center bg-gradient-to-b from-[#f3f3f3] to-transparent  overflow-hidden">
+      <div className=" min-h-[480px]  flex items-center bg-gradient-to-b from-[#f3f3f3] to-transparent  overflow-hidden">
 
-
-         <div className='flex  relative items-center py-16 flex-col lg:flex-row gap-8 w-full main-container'>
+         <div className='flex  relative items-center lg:py-10 py-16 flex-col lg:flex-row gap-8 w-full main-container'>
             <AnimatedIcon Icon={Basketball} className="bottom-0 right-10" />
             <motion.div
                initial={{ opacity: 0, x: -50 }}
@@ -21,7 +20,7 @@ const Hero = () => {
                   Swift Sports <span className='text-primaryOrange'>Shop</span>
                </h1>
                <p className="text-xl lg:text-2xl mb-8">
-                  Gear Up for Greatness with Our Premium Sports Equipment
+                  Gear Up for Greatness with Our Premium Sports Equipment Gear Up for Greatness with Our Premium Sports Equipment
                </p>
                <div className="flex flex-col sm:flex-row gap-4 mb-12">
                   <Button size="lg" className="bg-white text-blue-600  hover:bg-blue-50 hover:text-blue-700">
@@ -37,9 +36,24 @@ const Hero = () => {
                   <FeatureItem icon={Zap} text="Fast Delivery" />
                </div>
             </motion.div>
-            <div className=" flex items-center justify-end relative">
+            <div className=" flex items-center pt-10 lg:pt-0 lg:justify-end relative">
                <div className='w-4/5'>
-                  <img src={heroSports} alt="Swift sports shop" />
+                  <motion.img initial={{ opacity: 1, scale: 0.8, rotateY: 0 }}
+                     animate={{
+                        opacity: 1,
+                        scale: 1,
+                        x: [0, 50, 0],
+                        y: [0, -50, 0],
+                        rotateY: 20,
+                     }}
+                     transition={{
+                        duration: 6,
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                     }}
+                     style={{
+                        transformStyle: 'preserve-3d',
+                     }} src={heroSports} alt="Swift sports shop" />
                </div>
             </div>
          </div>

@@ -45,8 +45,8 @@ const Header = () => {
 
    return (
       <motion.header
-         className={`fixed w-full py-3 z-50 flex items-center transition-all duration-300 ${isScrolled ? 'shadow-sm  bg-whiteBg' : ' bg-transparent'
-         }`}
+         className={`fixed w-full py-3 z-50 flex items-center transition-all duration-300 ${isScrolled ? 'shadow-sm  bg-whiteBg' : ' bg-[#f3f3f3]'
+            }`}
          initial={{ y: -100 }}
          animate={{ y: 0 }}
          transition={{ duration: 0.5 }}
@@ -69,7 +69,7 @@ const Header = () => {
                               <NavLink
                                  to={item.href}
                                  className={({ isActive }) =>
-                                    `px-4 py-4 rounded-md transition-colors ${isActive
+                                    `px-4 py-4 text-base font-medium rounded-md transition-colors ${isActive
                                        ? 'text-darkOrange font-semibold bg-opacity-20 '
                                        : ' hover:text-darkOrange hover:bg-opacity-20'
                                     }`
@@ -82,7 +82,7 @@ const Header = () => {
                            <NavLink
                               to={item.href}
                               className={({ isActive }) =>
-                                 `px-4 py-4 rounded-md transition-colors ${isActive
+                                 `px-4 py-4 rounded-md text-base font-medium transition-colors ${isActive
                                     ? 'text-darkOrange font-semibold bg-opacity-20 '
                                     : ' hover:text-darkOrange hover:bg-opacity-20'
                                  }`
@@ -99,7 +99,7 @@ const Header = () => {
                                        <img src={subItem?.img} className='w-10 h-10 object-cover' alt="" />
                                        <NavLink
                                           to={subItem.href}
-                                          className="block py-2 px-4 rounded-md transition-colors hover:text-darkOrange hover:bg-opacity-20"
+                                          className="block py-2 px-4 text-base font-medium rounded-md transition-colors hover:text-darkOrange hover:bg-opacity-20"
                                        >
                                           {subItem.name}
                                        </NavLink>
@@ -118,7 +118,7 @@ const Header = () => {
                   <ShoppingCart className="h-5 w-5" />
                </Button>
 
-               <Button variant="outline" size="sm" className="hidden md:flex items-center space-x-2  hover:text-[#FF4500] hover:border-[#FF4500]">
+               <Button variant="outline" size="sm" className="hidden md:flex text-base font-medium items-center space-x-2  hover:text-[#FF4500] hover:border-[#FF4500]">
                   <LogIn className="h-4 w-4" />
                   <span>Sign In</span>
                </Button>
