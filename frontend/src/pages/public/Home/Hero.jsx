@@ -8,7 +8,7 @@ const Hero = () => {
    return (
       <div className=" min-h-[480px]  flex items-center bg-gradient-to-b from-[#f3f3f3] to-transparent  overflow-hidden">
 
-         <div className='flex  relative items-center lg:py-10 py-16 flex-col lg:flex-row gap-8 w-full main-container'>
+         <div className='flex   relative items-center lg:py-10 py-16 flex-col lg:flex-row lg:gap-0 gap-8 w-full main-container'>
             <AnimatedIcon Icon={Basketball} className="bottom-0 right-10" />
             <motion.div
                initial={{ opacity: 0, x: -50 }}
@@ -16,12 +16,13 @@ const Hero = () => {
                transition={{ duration: 0.8 }}
                className="w-full"
             >
-               <h1 className="text-4xl lg:text-6xl font-semibold text-gray-800 mb-4">
+               <h1 className="text-4xl lg:text-6xl font-bold text-title mb-4">
                   Swift Sports <span className='text-primaryOrange'>Shop</span>
                </h1>
-               <p className="text-xl lg:text-2xl mb-8">
-                  Gear Up for Greatness with Our Premium Sports Equipment Gear Up for Greatness with Our Premium Sports Equipment
+               <p className="text-xl text-des lg:text-2xl mb-8">
+                  Discover Top-Tier Sports Gear – Shop Now for Exclusive Deals on Premium Equipment and Apparel!
                </p>
+
                <div className="flex flex-col sm:flex-row gap-4 mb-12">
                   <Button size="lg" className="bg-white text-blue-600  hover:bg-blue-50 hover:text-blue-700">
                      Shop Now <ShoppingCart className="ml-2 h-5 w-5" />
@@ -36,7 +37,7 @@ const Hero = () => {
                   <FeatureItem icon={Zap} text="Fast Delivery" />
                </div>
             </motion.div>
-            <div className=" flex items-center pt-10 lg:pt-0 lg:justify-end relative">
+            <div className=" flex items-center w-full pt-10 lg:pt-0 lg:justify-center relative">
                <div className='w-4/5'>
                   <motion.img initial={{ opacity: 1, scale: 0.8, rotateY: 0 }}
                      animate={{
