@@ -1,4 +1,4 @@
-# **Swift Sports Shop Backend Documentation**
+# **Swift Sports Shop Documentation**
 
 ## **1. Overview**
 
