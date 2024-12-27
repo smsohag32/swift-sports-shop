@@ -18,6 +18,8 @@ import {
    NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
 import Logo from '@/assets/svg/Logo'
+import { categories } from '@/utils/data'
+import { Card } from '@/components/ui/card'
 
 const Header = () => {
    const [isScrolled, setIsScrolled] = useState(false)
@@ -35,11 +37,7 @@ const Header = () => {
       {
          name: 'Products',
          href: '/products',
-         subItems: [
-            { name: 'Category 1', href: '/products/category-1' },
-            { name: 'Category 2', href: '/products/category-2' },
-            { name: 'Category 3', href: '/products/category-3' },
-         ],
+         subItems: categories.map(category => ({ name: category.name, href: `/product/${category.name.toLowerCase()}`, img: category.image }))
       },
       { name: 'About', href: '/about' },
       { name: 'Contact', href: '/contact' },
@@ -65,10 +63,20 @@ const Header = () => {
             <NavigationMenu className="hidden md:flex">
                <NavigationMenuList>
                   {navItems.map((item) => (
-                     <NavigationMenuItem key={item.name}>
+                     <NavigationMenuItem key={item.name} >
                         {item.subItems ? (
-                           <NavigationMenuTrigger className="px-4 py-4 rounded-md transition-colors hover:text-darkOrange hover:bg-opacity-20">
-                              {item.name}
+                           <NavigationMenuTrigger className="bg-transparent hover:bg-transparent">
+                              <NavLink
+                                 to={item.href}
+                                 className={({ isActive }) =>
+                                    `px-4 py-4 rounded-md transition-colors ${isActive
+                                       ? 'text-darkOrange font-semibold bg-opacity-20 '
+                                       : ' hover:text-darkOrange hover:bg-opacity-20'
+                                    }`
+                                 }
+                              >
+                                 {item.name}
+                              </NavLink>
                            </NavigationMenuTrigger>
                         ) : (
                            <NavLink
@@ -85,16 +93,17 @@ const Header = () => {
                         )}
                         {item.subItems && (
                            <NavigationMenuContent className="">
-                              <ul className="grid w-[200px] gap-3 p-4 bg-whiteBg shadow-md rounded-md">
+                              <ul className="grid w-[400px] max-w-3xl  lg:grid-cols-2 gap-3 p-4 bg-whiteBg shadow-md rounded-md">
                                  {item.subItems.map((subItem) => (
-                                    <li key={subItem.name}>
+                                    <Card key={subItem.name} className="flex border-opacity-30 border-slate-300 border shadow-none items-center gap-3 px-4 py-3">
+                                       <img src={subItem?.img} className='w-10 h-10 object-cover' alt="" />
                                        <NavLink
                                           to={subItem.href}
-                                          className="block py-4 px-4 rounded-md transition-colors hover:text-darkOrange hover:bg-opacity-20"
+                                          className="block py-2 px-4 rounded-md transition-colors hover:text-darkOrange hover:bg-opacity-20"
                                        >
                                           {subItem.name}
                                        </NavLink>
-                                    </li>
+                                    </Card>
                                  ))}
                               </ul>
                            </NavigationMenuContent>
