@@ -13,7 +13,7 @@ const Hero = () => {
             <AnimatedIcon Icon={Basketball} className="bottom-0 right-10" />
             <AnimatedIcon Icon={Tennis} className="top-5 right-0" />
             <AnimatedIcon Icon={Soccer} className=" left-2/3" />
-         <motion.div
+            <motion.div
                initial={{ opacity: 0, x: -50 }}
                animate={{ opacity: 1, x: 0 }}
                transition={{ duration: 0.8 }}
@@ -22,10 +22,10 @@ const Hero = () => {
                <h1 className="text-4xl lg:text-6xl font-semibold text-gray-800 mb-4">
                   Swift Sports <span className='text-primaryOrange'>Shop</span>
                </h1>
-               <p className="text-xl lg:text-2xl mb-6">
+               <p className="text-xl lg:text-2xl mb-8">
                   Gear Up for Greatness with Our Premium Sports Equipment
                </p>
-               <div className="flex flex-col sm:flex-row gap-4 mb-8">
+               <div className="flex flex-col sm:flex-row gap-4 mb-12">
                   <Button size="lg" className="bg-white text-blue-600 hover:bg-blue-50 hover:text-blue-700">
                      Shop Now <ShoppingCart className="ml-2 h-5 w-5" />
                   </Button>

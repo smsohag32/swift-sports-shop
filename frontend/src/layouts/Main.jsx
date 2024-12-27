@@ -1,12 +1,13 @@
 import MainLayout from "@/components/layouts/MainLayout/MainLayout";
 
-import { Outlet } from "react-router-dom";
+import { Outlet, ScrollRestoration } from "react-router-dom";
 
 const Main = () => {
 
    return (
       <MainLayout>
          <Outlet />
+         <ScrollRestoration />
       </MainLayout>
    );
 };

@@ -1,3 +1,4 @@
+import Footer from "./Footer";
 import Header from "./Header";
 
 const MainLayout = ({ children }) => {
@@ -7,6 +8,7 @@ const MainLayout = ({ children }) => {
          <div className="pt-16 min-h-[40vh]">
             {children}
          </div>
+         <Footer />
       </div>
    );
 };
