@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { ShoppingCart, Menu, ChevronRight, LogIn, ChevronDown } from 'lucide-react'
 import { Button } from "@/components/ui/button"
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import {
    Sheet,
    SheetContent,
@@ -23,7 +23,7 @@ import { Card } from '@/components/ui/card'
 
 const Header = () => {
    const [isScrolled, setIsScrolled] = useState(false)
-
+   const navigate = useNavigate()
    useEffect(() => {
       const handleScroll = () => {
          setIsScrolled(window.scrollY > 10)
@@ -154,7 +154,7 @@ const Header = () => {
                               </motion.span>
                            </NavLink>
                         ))}
-                        <Button variant="outline" size="sm" className="mt-8 w-full flex items-center justify-center space-x-2  hover:text-[#FF4500] hover:border-[#FF4500]">
+                        <Button onClick={() => navigate("/authentication/login")} variant="outline" size="sm" className="mt-8 w-full flex items-center justify-center space-x-2  hover:text-[#FF4500] hover:border-[#FF4500]">
                            <LogIn className="h-4 w-4" />
                            <span>Sign In</span>
                         </Button>
