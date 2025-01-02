@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
-const dbLink = `mongodb+srv://smsohag:${process.env.DB_PASSWORD}@portfolio.0rkgq.mongodb.net/portfolio_db?retryWrites=true&w=majority&appName=portfolio`;
+const dbLink = `mongodb+srv://smsohag32:${process.env.DB_PASSWORD}@swift-shop.ixqcd.mongodb.net/swift_shop_bd?retryWrites=true&w=majority&appName=swift-shop`;
 
 export const connectDb = async () => {
    try {
