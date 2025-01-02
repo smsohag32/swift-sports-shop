@@ -45,7 +45,7 @@ const Header = () => {
 
    return (
       <motion.header
-         className={`fixed w-full py-3 z-50 flex items-center transition-all duration-300 ${isScrolled ? 'shadow-sm  bg-whiteBg' : ' bg-[#f3f3f3]'
+         className={`fixed w-full py-3 z-50 flex  items-center transition-all duration-300 ${isScrolled ? 'shadow-sm  bg-whiteBg' : ' bg-[#f3f3f3]'
             }`}
          initial={{ y: -100 }}
          animate={{ y: 0 }}
@@ -118,7 +118,7 @@ const Header = () => {
                   <ShoppingCart className="h-5 w-5" />
                </Button>
 
-               <Button variant="outline" size="sm" className="hidden md:flex text-base font-medium items-center space-x-2  hover:text-[#FF4500] hover:border-[#FF4500]">
+               <Button onClick={() => navigate("/authentication/login")} variant="outline" size="sm" className="hidden md:flex text-base font-medium items-center space-x-2  hover:text-[#FF4500] hover:border-[#FF4500]">
                   <LogIn className="h-4 w-4" />
                   <span>Sign In</span>
                </Button>
