@@ -41,7 +41,7 @@ const Login = () => {
             }
          } else {
             console.log(resultAction)
-            toast.error(`${resultAction?.message}`);
+            toast.error(`${resultAction?.message}` || "Login Failed");
          }
       } catch (error) {
          if (error.response && error.response.status === 400) {

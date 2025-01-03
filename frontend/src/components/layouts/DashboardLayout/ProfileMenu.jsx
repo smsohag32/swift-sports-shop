@@ -22,7 +22,7 @@ import { Button } from "@/components/ui/button"
 import { logoutUser } from "@/redux-store/slice/authSlice"
 import { useDispatch } from "react-redux"
 
-export function ProfileMenu({ adminView }) {
+export function ProfileMenu() {
    const navigate = useNavigate()
    const { user } = useAuth()
    const dispatch = useDispatch()
@@ -36,9 +36,9 @@ export function ProfileMenu({ adminView }) {
          <DropdownMenuTrigger asChild className="w-full cursor-pointer px-2 py-2 bg-titleBg rounded-[2px]">
             <div className="flex items-center justify-between gap-2">
                <div className="flex items-center gap-2">
-                  <UserAvatar className="bg-green-700 text-white" name={formatName(user?.name?.slice(0, 20))} />
+                  <UserAvatar className="bg-green-700 text-white" name={formatName(user?.name?.slice(0, 13))} />
                   <span className="flex flex-col ">
-                     {formatName((user?.name?.slice(0, 20)) || "Sohag Sheik")} ...
+                     {formatName((user?.name?.slice(0, 13)) || "Sohag Sheik")} ...
                      <span className="text-xs font-normal mt-0.5 text-[#B4B4B4]">
                         {formatName(user?.role)}
                      </span>

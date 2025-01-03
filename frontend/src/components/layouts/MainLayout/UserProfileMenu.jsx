@@ -40,9 +40,9 @@ export function UserProfileMenu() {
       <DropdownMenu className="outline-none ring-0" >
          <DropdownMenuTrigger asChild className="outline-none">
             <div className="flex cursor-pointer outline-none items-center gap-2 px-2  py-1 rounded-full bg-gray-200">
-               <UserAvatar size={"sm"} className="bg-blue-600  text-white" name={formatName(user?.name?.slice(0, 20))} />
+               <UserAvatar size={"sm"} className="bg-blue-600  text-white" name={formatName(user?.name?.slice(0, 13))} />
                <span className="font-medium text-gray-700">
-                  {formatName((user?.name?.slice(0, 20)) || "Guest User")}
+                  {formatName((user?.name?.slice(0, 13)) || "Guest User")}
                </span>
                <svg width="12" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M1 0.999999L7 7L13 1" stroke="#4B5563" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
