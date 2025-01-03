@@ -2,39 +2,61 @@
 
 import { useState } from 'react'
 import { useForm } from "react-hook-form"
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Mail, Lock, ArrowRight } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import Logo from "@/assets/svg/Logo"
-import loginImage from "@/assets/login/login.webp"
+import { toast } from 'sonner'
+import { loginUser } from '@/redux-store/slice/authSlice'
+import { useDispatch } from 'react-redux'
 
 const Login = () => {
+   const dispatch = useDispatch()
+   const navigate = useNavigate()
    const { register, handleSubmit, formState: { isValid } } = useForm({
       mode: 'onChange'
    })
    const [isLoading, setIsLoading] = useState(false)
 
    const handleLogin = async (data) => {
-      setIsLoading(true)
-      // Implement your login logic here
-      console.log('Login data:', data)
-      // Simulate API call8
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      setIsLoading(false)
-   }
+      const { email, password } = data;
+      setIsLoading(true);
+      try {
+         const resultAction = await dispatch(loginUser({ email, password })).unwrap();
+
+         if (resultAction) {
+            if (resultAction?.user?.role == "admin") {
+               toast.success("Login successful");
+               navigate("/dashboard");
+
+            } else if (resultAction?.user?.role === "user") {
+               toast.success("Login successful");
+               navigate("/");
+            } else {
+               toast.success("Unknown User");
+               navigate("/");
+            }
+         } else {
+            console.log(resultAction)
+            toast.error(`${resultAction?.message}`);
+         }
+      } catch (error) {
+         if (error.response && error.response.status === 400) {
+            toast.error("Login failed: ", error.response.data || "Invalid login credentials");
+         } else {
+            toast.error("Login failed due to an unexpected error");
+         }
+      } finally {
+         setIsLoading(false);
+      }
+   };
 
    return (
       <div className="min-h-screen  flex items-center justify-center main-container">
-         <div className="hidden lg:block lg:w-1/2 ">
-            <img
-               className="object-cover w-full h-full rounded-2xl "
-               src={loginImage}
-               alt="Swift Sports Shop"
-            />
-         </div>
+
          <Card className="w-full max-w-md">
             <CardHeader className="space-y-1">
                <div className="flex justify-center mb-4">
@@ -76,7 +98,7 @@ const Login = () => {
                         <Checkbox id="remember" />
                         <label
                            htmlFor="remember"
-                           className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                           className="text-sm cursor-pointer font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                         >
                            Remember me
                         </label>

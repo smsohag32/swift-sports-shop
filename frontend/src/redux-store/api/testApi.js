@@ -4,9 +4,9 @@ const testApi = apiSlice.injectEndpoints({
    endpoints: (builder) => ({
       getTest: builder.query({
          query: () => ({
-            url: `/product`,
+            url: `/products`,
          }),
-         providesTags: ["dsr"],
+         providesTags: ["products"],
       }),
    }),
 });
