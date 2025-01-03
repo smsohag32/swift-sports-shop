@@ -1,7 +1,6 @@
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 
-
 export const createUser = async (req, res) => {
    try {
       const { firstName, lastName, email, password, role = "ADMIN", status } = req.body;
@@ -31,7 +30,7 @@ export const createUser = async (req, res) => {
 
 export const signUp = async (req, res) => {
    try {
-      const { name, email, password, role } = req.body;
+      const { name, email, password, role, profile = "" } = req.body;
       // Check if user already exists
       const existingUser = await User.findOne({ email });
       if (existingUser) {
@@ -40,13 +39,14 @@ export const signUp = async (req, res) => {
       const newUser = new User({
          name,
          email,
+         profile,
          password,
          role,
       });
 
       const savedUser = await newUser.save();
-
-      res.status(201).json({ user: savedUser });
+      const { password: _, ...userWithoutPassword } = savedUser.toObject();
+      res.status(201).json({ user: userWithoutPassword });
    } catch (error) {
       res.status(500).json({ message: error.message });
    }
@@ -119,6 +119,7 @@ export const updateUser = async (req, res) => {
       };
       console.log(req.body);
       const result = await User.updateOne(query, updatedDoc, option);
+      
       res.status(200).json(result);
    } catch (error) {
       res.status(500).json({ message: error.message });

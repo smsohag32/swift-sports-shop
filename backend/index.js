@@ -7,7 +7,7 @@ dotenv.config();
 const port = process.env.PORT || 4000;
 import { connectDb } from "./config/dbConfig.js";
 
-import userRoute from "./routes/userRoute.js";
+import mainRoute from "./routes/mainRoute.js";
 
 const corsOptions = {
    origin: "*",
@@ -26,7 +26,7 @@ app.get("/", (req, res) => {
 });
 
 // api
-app.use("/api/v1", userRoute);
+app.use(mainRoute);
 
 app.listen(port, async () => {
    console.log("server is running");

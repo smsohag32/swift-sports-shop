@@ -11,6 +11,10 @@ const categorySchema = new mongoose.Schema({
       type: String,
       trim: true,
    },
+   status: {
+      type: Boolean,
+      default: true,
+   },
    products: [
       {
          type: mongoose.Schema.Types.ObjectId,
