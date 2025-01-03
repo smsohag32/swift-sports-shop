@@ -26,11 +26,10 @@ export const deleteCookie = (name) => {
 
 export const formatName = (str) => {
    return str
-      .replace(
-         /([A-Z]+|[a-z]+(?:[-_][a-zA-Z]+)*)/g,
-         (match) => match.charAt(0).toUpperCase() + match.slice(1).toLowerCase()
-      )
-      .replace(/_/g, " ");
+      ?.replace(/[_-]/g, " ")
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()) // Capitalize first letter of each word
+      .join(" ");
 };
 
 export const handleBack = () => {

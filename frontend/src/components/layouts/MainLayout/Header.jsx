@@ -20,9 +20,12 @@ import {
 import Logo from '@/assets/svg/Logo'
 import { categories } from '@/utils/data'
 import { Card } from '@/components/ui/card'
+import useAuth from '@/hooks/useAuth'
+import { ProfileMenu } from '../DashboardLayout/ProfileMenu'
 
 const Header = () => {
    const [isScrolled, setIsScrolled] = useState(false)
+   const { user } = useAuth()
    const navigate = useNavigate()
    useEffect(() => {
       const handleScroll = () => {
@@ -118,10 +121,24 @@ const Header = () => {
                   <ShoppingCart className="h-5 w-5" />
                </Button>
 
-               <Button onClick={() => navigate("/authentication/login")} variant="outline" size="sm" className="hidden md:flex text-base font-medium items-center space-x-2  hover:text-[#FF4500] hover:border-[#FF4500]">
-                  <LogIn className="h-4 w-4" />
-                  <span>Sign In</span>
-               </Button>
+               {user?.role === "admin" ? (
+                  <ProfileMenu adminView={true} />
+               ) : user?.role === "user" ? (
+                  <ProfileMenu />
+               ) : (
+                  <Button
+                     onClick={() => navigate("/authentication/login")}
+                     variant="outline"
+                     size="sm"
+                     className="hidden md:flex text-base font-medium items-center space-x-2 hover:text-[#FF4500] hover:border-[#FF4500]"
+                  >
+                     <LogIn className="h-4 w-4" />
+                     <span>Sign In</span>
+                  </Button>
+               )}
+
+
+
 
                <Sheet>
                   <SheetTrigger asChild>
@@ -154,10 +171,24 @@ const Header = () => {
                               </motion.span>
                            </NavLink>
                         ))}
-                        <Button onClick={() => navigate("/authentication/login")} variant="outline" size="sm" className="mt-8 w-full flex items-center justify-center space-x-2  hover:text-[#FF4500] hover:border-[#FF4500]">
-                           <LogIn className="h-4 w-4" />
-                           <span>Sign In</span>
-                        </Button>
+
+                        {user?.role === "admin" ? (
+                           <ProfileMenu adminView={true} />
+                        ) : user?.role === "user" ? (
+                           <ProfileMenu />
+                        ) : (
+                           <Button
+                              onClick={() => navigate("/authentication/login")}
+                              variant="outline"
+                              size="sm"
+                              className="hidden md:flex text-base font-medium items-center space-x-2 hover:text-[#FF4500] hover:border-[#FF4500]"
+                           >
+                              <LogIn className="h-4 w-4" />
+                              <span>Sign In</span>
+                           </Button>
+                        )}
+
+
                      </nav>
                   </SheetContent>
                </Sheet>
