@@ -22,6 +22,7 @@ import { categories } from '@/utils/data'
 import { Card } from '@/components/ui/card'
 import useAuth from '@/hooks/useAuth'
 import { ProfileMenu } from '../DashboardLayout/ProfileMenu'
+import { UserProfileMenu } from './UserProfileMenu'
 
 const Header = () => {
    const [isScrolled, setIsScrolled] = useState(false)
@@ -121,10 +122,10 @@ const Header = () => {
                   <ShoppingCart className="h-5 w-5" />
                </Button>
 
-               {user?.role === "admin" ? (
+               {user?.role === "user" ? (
                   <ProfileMenu adminView={true} />
-               ) : user?.role === "user" ? (
-                  <ProfileMenu />
+               ) : user?.role === "admin" ? (
+                  <UserProfileMenu />
                ) : (
                   <Button
                      onClick={() => navigate("/authentication/login")}

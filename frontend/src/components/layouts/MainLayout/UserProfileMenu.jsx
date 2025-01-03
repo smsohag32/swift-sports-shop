@@ -1,10 +1,6 @@
-import {
-   LogOut,
-   Settings,
-   User,
-
-} from "lucide-react"
-
+import { useNavigate } from "react-router-dom"
+import { useDispatch } from "react-redux"
+import { LogOut, User, ShoppingCart, Package, Heart, CreditCard, HelpCircle, Settings } from 'lucide-react'
 import {
    DropdownMenu,
    DropdownMenuContent,
@@ -14,68 +10,68 @@ import {
    DropdownMenuSeparator,
    DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { useNavigate } from "react-router-dom"
+import { Button } from "@/components/ui/button"
+import { UserAvatar } from "@/components/user-avatar/UserAvatar"
 import { formatName } from "@/utils/helper"
 import useAuth from "@/hooks/useAuth"
-import { UserAvatar } from "@/components/user-avatar/UserAvatar"
-import { Button } from "@/components/ui/button"
 import { logoutUser } from "@/redux-store/slice/authSlice"
-import { useDispatch } from "react-redux"
 
 export function UserProfileMenu() {
    const navigate = useNavigate()
    const { user } = useAuth()
    const dispatch = useDispatch()
+
    const handleLogout = async () => {
       await dispatch(logoutUser())
-      navigate("/", { replace: true });
-   };
+      navigate("/", { replace: true })
+   }
+
+   const menuItems = [
+      { icon: ShoppingCart, label: "My Cart", action: () => navigate("/cart") },
+      { icon: Package, label: "My Orders", action: () => navigate("/orders") },
+      { icon: Heart, label: "Wishlist", action: () => navigate("/wishlist") },
+      { icon: CreditCard, label: "Payment Methods", action: () => navigate("/payment-methods") },
+      { icon: User, label: "Profile", action: () => navigate("/profile") },
+      { icon: Settings, label: "Account Settings", action: () => navigate("/settings") },
+      { icon: HelpCircle, label: "Help & Support", action: () => navigate("/support") },
+   ]
 
    return (
-      <DropdownMenu className="w-full">
-         <DropdownMenuTrigger asChild className="w-full cursor-pointer px-2 py-2 bg-titleBg rounded-[2px]">
-            <div className="flex items-center justify-between gap-2">
-               <div className="flex items-center gap-2">
-                  <UserAvatar className="bg-green-700 text-white" name={formatName(user?.name?.slice(0, 20))} />
-                  <span className="flex flex-col ">
-                     {formatName((user?.name?.slice(0, 20)) || "Sohag Sheik")} ...
-                  </span>
-
-
-               </div>
-               <span>
-                  <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                     <path d="M1 0.999999L7 7L13 1" stroke="#8B8B8B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-
+      <DropdownMenu className="outline-none ring-0" >
+         <DropdownMenuTrigger asChild className="outline-none">
+            <div className="flex cursor-pointer outline-none items-center gap-2 px-2  py-1 rounded-full bg-gray-200">
+               <UserAvatar size={"sm"} className="bg-blue-600  text-white" name={formatName(user?.name?.slice(0, 20))} />
+               <span className="font-medium text-gray-700">
+                  {formatName((user?.name?.slice(0, 20)) || "Guest User")}
                </span>
+               <svg width="12" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 0.999999L7 7L13 1" stroke="#4B5563" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+               </svg>
             </div>
          </DropdownMenuTrigger>
-         <DropdownMenuContent align="end" className="w-56" >
-            <DropdownMenuLabel>Account</DropdownMenuLabel>
+         <DropdownMenuContent align="end" className="w-64 p-5 outline-none">
+            <DropdownMenuLabel className="font-normal">
+               <div className="flex flex-col space-y-1">
+                  <p className="text-base font-medium leading-none">{user?.name}</p>
+                  <p className="text-xs leading-none text-gray-500">{user?.email}</p>
+               </div>
+            </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-               <DropdownMenuItem className="gap-2 cursor-pointer">
-                  <User />
-                  <span>Profile</span>
-               </DropdownMenuItem>
-               <DropdownMenuItem className="gap-2 cursor-pointer">
-                  <Settings />
-                  <span>Settings</span>
-               </DropdownMenuItem>
+               {menuItems.map((item, index) => (
+                  <DropdownMenuItem key={index} className="cursor-pointer" onSelect={item.action}>
+                     <item.icon className="w-4 h-4 mr-2" />
+                     <span>{item.label}</span>
+                  </DropdownMenuItem>
+               ))}
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={handleLogout}>
-               <Button
-                  variant="ghost"
-                  size="sm"
-
-                  className="flex !px-0 !py-0 items-center justify-start group gap-2 w-full">
-                  <span><LogOut className="" size={16} /></span>
-                  <span>Logout</span>
-               </Button>
+            <DropdownMenuItem className="cursor-pointer" onSelect={handleLogout}>
+               <LogOut className="w-4 h-4 mr-2" />
+               <span>Log out</span>
             </DropdownMenuItem>
          </DropdownMenuContent>
       </DropdownMenu>
    )
 }
+
