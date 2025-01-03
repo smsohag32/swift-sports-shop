@@ -1,7 +1,10 @@
 import logoIcon from "@/assets/logo.png"
+import { Link } from "react-router-dom"
 const Logo = ({ className = "", width = "200", height = "50" }) => {
    return (
-      <img src={logoIcon} className={className} width={width} height={height} />
+      <Link to={"/"} className="cursor-pointer">
+         <img src={logoIcon} className={className} width={width} height={height} />
+      </Link>
    )
 }
 

@@ -39,7 +39,7 @@ const Header = () => {
          href: '/products',
          subItems: categories.map(category => ({ name: category.name, href: `/product/${category.name.toLowerCase()}`, img: category.image }))
       },
-      { name: 'About', href: '/about' },
+      { name: 'About', href: '/about-us' },
       { name: 'Contact', href: '/contact' },
    ]
 

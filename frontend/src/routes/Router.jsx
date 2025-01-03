@@ -4,6 +4,7 @@ import Main from "@/layouts/Main";
 import Login from "@/pages/authentication/Login";
 import NotFound from "@/pages/NotFound/NotFound";
 import Notifications from "@/pages/notifications/Notifications";
+import About from "@/pages/public/About/About";
 import HomePage from "@/pages/public/Home/HomePage";
 import { createBrowserRouter } from "react-router-dom";
 
@@ -15,6 +16,10 @@ export const router = createBrowserRouter([
          {
             path: "/",
             element: <HomePage />,
+         },
+         {
+            path: "/about-us",
+            element: <About />,
          },
          {
             path: "/notifications",
