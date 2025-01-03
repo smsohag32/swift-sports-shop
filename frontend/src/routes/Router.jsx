@@ -2,6 +2,9 @@
 import Dashboard from "@/layouts/Dashboard";
 import Main from "@/layouts/Main";
 import Login from "@/pages/authentication/Login";
+import Categories from "@/pages/dashboard/Categories/Categories";
+import Overview from "@/pages/dashboard/Overview/Overview";
+import ManageProducts from "@/pages/dashboard/Products/ManageProducts";
 import NotFound from "@/pages/NotFound/NotFound";
 import Notifications from "@/pages/notifications/Notifications";
 import About from "@/pages/public/About/About";
@@ -32,13 +35,20 @@ export const router = createBrowserRouter([
       ],
    },
    {
-      path: "/dashboard/",
+      path: "/dashboard",
       element: <Dashboard />,
       children: [
-
          {
-            path: "/dashboard/notifications",
-            element: <Notifications />,
+            path: "/dashboard",
+            element: <Overview />,
+         },
+         {
+            path: "/dashboard/categories",
+            element: <Categories />,
+         },
+         {
+            path: "/dashboard/products",
+            element: <ManageProducts />,
          },
       ],
    },

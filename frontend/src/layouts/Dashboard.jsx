@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 
 const Dashboard = () => {
    return (
-      <div>
+      <div className="bg-[#f6f6f6] min-h-screen">
          <DashboardLayout >
             <Outlet />
          </DashboardLayout>

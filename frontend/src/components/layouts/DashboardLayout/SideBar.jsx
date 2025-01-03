@@ -1,12 +1,11 @@
 import { useState } from "react";
 import SidebarItem from "./SidebarItem";
-// import logo from "@/assets/icons/logo.png";
 import {
-   ArrowLeftToLine,
-   Bell,
-
+   ChevronsLeft,
+   House,
 } from "lucide-react";
 import { ProfileMenu } from "./ProfileMenu";
+import Logo from "@/assets/svg/Logo";
 
 export default function Sidebar({ toggle, setToggle }) {
    const [openItems, setOpenItems] = useState({});
@@ -16,25 +15,21 @@ export default function Sidebar({ toggle, setToggle }) {
 
    const items = [
       {
-         to: "/notifications",
-         label: "Notifications",
-
-         icon: <Bell />,
+         to: "/dashboard",
+         label: "Dashboard",
+         icon: <House />,
       },
    ];
 
    return (
-      <div className="w-[300px]  pb-6  bg-lightDark  flex flex-col  h-screen overflow-hidden   ">
-         <button
-            onClick={() => setToggle(!toggle)}
-            className="absolute bg-lightOrange   text-nOrange rounded-s-full p-3 text-bold right-0 top-5">
-            <ArrowLeftToLine size={16} />
-         </button>
-         <div className="flex items-center mb-6 w-full flex-col py-2 overflow-hidden  justify-center px-4  ">
-            <div className="w-full flex items-center gap-6 justify-start py-2">
-               {/* <img src={logo} alt="" className="max-w-[120px]" /> */} logo
+      <div className="w-[300px] bg-white  pb-6  bg-lightDark  flex flex-col  h-screen overflow-hidden   ">
+         <div className="flex items-center mb-6 w-full  py-4 overflow-hidden  justify-center px-4  ">
+            <div className="w-full flex items-center  gap-6 justify-start">
+               <Logo className="w-32" />
             </div>
-
+            {!toggle && <button onClick={() => setToggle(!toggle)} className="">
+               <ChevronsLeft />
+            </button>}
          </div>
 
          <div className="px-4  space-y-6 max-h-[60vh] overflow-auto custom-scrollbar pb-6">

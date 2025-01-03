@@ -48,7 +48,7 @@ export function ProfileMenu() {
                </span>
             </div>
          </DropdownMenuTrigger>
-         <DropdownMenuContent className="w-56" >
+         <DropdownMenuContent align="" className="w-56" >
             <DropdownMenuLabel>Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>

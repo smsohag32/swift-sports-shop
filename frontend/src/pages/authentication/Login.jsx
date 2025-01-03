@@ -75,6 +75,7 @@ const Login = () => {
                         <Input
                            id="email"
                            type="email"
+                           defaultValue="sohagsheik32@gmail.com"
                            placeholder="Email address"
                            className="pl-10"
                            {...register("email", { required: true })}
@@ -88,6 +89,7 @@ const Login = () => {
                            id="password"
                            type="password"
                            placeholder="Password"
+                           defaultValue="11223344"
                            className="pl-10"
                            {...register("password", { required: true })}
                         />
