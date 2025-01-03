@@ -23,6 +23,7 @@ import { Card } from '@/components/ui/card'
 import useAuth from '@/hooks/useAuth'
 import { ProfileMenu } from '../DashboardLayout/ProfileMenu'
 import { UserProfileMenu } from './UserProfileMenu'
+import HeaderCarts from '@/pages/public/Carts/HeaderCarts'
 
 const Header = () => {
    const [isScrolled, setIsScrolled] = useState(false)
@@ -118,9 +119,7 @@ const Header = () => {
             </NavigationMenu>
 
             <div className="flex items-center space-x-4">
-               <Button variant="ghost" size="icon" className=" hover:text-[#FF4500]">
-                  <ShoppingCart className="h-5 w-5" />
-               </Button>
+               <HeaderCarts />
 
                {user?.role === "user" ? (
                   <ProfileMenu adminView={true} />
@@ -137,10 +136,6 @@ const Header = () => {
                      <span>Sign In</span>
                   </Button>
                )}
-
-
-
-
                <Sheet>
                   <SheetTrigger asChild>
                      <Button variant="ghost" size="icon" className=" hover:text-[#FF4500] md:hidden">
