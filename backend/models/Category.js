@@ -15,6 +15,9 @@ const categorySchema = new mongoose.Schema({
       type: Boolean,
       default: true,
    },
+   image: {
+      type: String,
+   },
    products: [
       {
          type: mongoose.Schema.Types.ObjectId,

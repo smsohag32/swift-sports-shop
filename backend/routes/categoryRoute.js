@@ -7,15 +7,16 @@ import {
    deleteCategory,
    changeCategoryStatus,
 } from "../controllers/category.controller.js";
+import { upload } from "../utils/upload.js";
 
 const router = express.Router();
 
 // Routes
-router.post("/categories", createCategory); // Create category
-router.get("/categories", getCategories); // Get all categories
+router.post("/categories/", upload.single("image"), createCategory);
+router.get("/categories", getCategories);
 router.get("/categories/:id", getCategoryById);
-router.put("/categories/:id", updateCategory);
-router.delete("/categories/:id", deleteCategory); // Delete category by ID
-router.patch("/categories/:id/status", changeCategoryStatus); // Change category status
+router.put("/categories/:id", upload.single("image"), updateCategory);
+router.delete("/categories/:id", deleteCategory);
+router.patch("/categories/:id/status", changeCategoryStatus);
 
 export default router;

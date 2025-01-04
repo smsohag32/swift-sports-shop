@@ -1,10 +1,16 @@
 import Category from "../models/Category.js";
 import mongoose from "mongoose";
+import { deleteImageFromCloud, uploadImageToCloud } from "../store/upLoadToCloud.js";
 
 // Create a new category
 export const createCategory = async (req, res) => {
    try {
-      const { name, description } = req.body;
+      let imageUrls = [];
+      if (req.file) {
+         imageUrls = await uploadImageToCloud([req.file]);
+      }
+      const content = JSON.parse(req.body.content);
+      const { name, description } = content;
 
       // Check if category already exists
       const existingCategory = await Category.findOne({ name });
@@ -15,6 +21,7 @@ export const createCategory = async (req, res) => {
       const newCategory = new Category({
          name,
          description,
+         image: imageUrls[0] || "",
       });
 
       const savedCategory = await newCategory.save();
@@ -55,15 +62,28 @@ export const getCategoryById = async (req, res) => {
 export const updateCategory = async (req, res) => {
    try {
       const { id } = req.params;
-      const { name, description } = req.body;
+
+      const { name, description } = JSON.parse(req.body.content);
 
       if (!mongoose.Types.ObjectId.isValid(id)) {
          return res.status(400).json({ message: "Invalid category ID." });
       }
 
+      const category = await Category.findById(id);
+      if (!category) {
+         return res.status(404).json({ message: "Category not found." });
+      }
+
+      let image = category.image;
+      if (req.file) {
+         if (image) {
+            await deleteImageFromCloud([image]);
+         }
+         image = await uploadImageToCloud([req.file]);
+      }
       const updatedCategory = await Category.findByIdAndUpdate(
          id,
-         { name, description, updatedAt: Date.now() },
+         { name, description, image, updatedAt: Date.now() },
          { new: true, runValidators: true }
       );
 
@@ -87,6 +107,9 @@ export const deleteCategory = async (req, res) => {
       const deletedCategory = await Category.findByIdAndDelete(id);
       if (!deletedCategory) {
          return res.status(404).json({ message: "Category not found." });
+      }
+      if (deletedCategory.image) {
+         await deleteImageFromCloud([deletedCategory.image]);
       }
       res.status(200).json({ message: "Category deleted successfully." });
    } catch (error) {
