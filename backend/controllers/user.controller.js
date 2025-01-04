@@ -1,7 +1,6 @@
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 
-
 export const createUser = async (req, res) => {
    try {
       const { firstName, lastName, email, password, role = "ADMIN", status } = req.body;
@@ -31,7 +30,7 @@ export const createUser = async (req, res) => {
 
 export const signUp = async (req, res) => {
    try {
-      const { name, email, password, role } = req.body;
+      const { name, email, password, role, profile = "" } = req.body;
       // Check if user already exists
       const existingUser = await User.findOne({ email });
       if (existingUser) {
@@ -40,13 +39,14 @@ export const signUp = async (req, res) => {
       const newUser = new User({
          name,
          email,
+         profile,
          password,
          role,
       });
 
       const savedUser = await newUser.save();
-
-      res.status(201).json({ user: savedUser });
+      const { password: _, ...userWithoutPassword } = savedUser.toObject();
+      res.status(201).json({ user: userWithoutPassword });
    } catch (error) {
       res.status(500).json({ message: error.message });
    }
@@ -107,19 +107,34 @@ export const changeUserStatus = async (req, res) => {
    }
 };
 
-// Update User Information
 export const updateUser = async (req, res) => {
    try {
-      const user = req.body;
-      const email = req.params.email;
-      const query = { email };
-      const option = { upsert: true };
-      const updatedDoc = {
-         $set: user,
-      };
-      console.log(req.body);
-      const result = await User.updateOne(query, updatedDoc, option);
-      res.status(200).json(result);
+      const { name, email, profile, status } = req.body;
+      const currentEmail = req.params.email;
+
+      const query = { email: currentEmail };
+      const user = await User.findOne(query);
+
+      if (!user) {
+         return res.status(404).json({ message: "User not found" });
+      }
+
+      // Update fields dynamically
+      if (name) user.name = name;
+      if (profile) user.profile = profile;
+      if (status !== undefined) user.status = status;
+
+      if (email && email !== currentEmail) {
+         const emailExists = await User.findOne({ email });
+         if (emailExists) {
+            return res.status(400).json({ message: "Email already in use" });
+         }
+         user.email = email;
+      }
+
+      user.updatedAt = new Date();
+      const updatedUser = await user.save();
+      res.status(200).json({ message: "User updated successfully." });
    } catch (error) {
       res.status(500).json({ message: error.message });
    }

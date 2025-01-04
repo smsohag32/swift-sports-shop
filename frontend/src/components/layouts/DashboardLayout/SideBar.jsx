@@ -1,61 +1,85 @@
-import { useState } from "react";
-import SidebarItem from "./SidebarItem";
-// import logo from "@/assets/icons/logo.png";
-import {
-   ArrowLeftToLine,
-   Bell,
+'use client'
 
-} from "lucide-react";
-import { ProfileMenu } from "./ProfileMenu";
+import { useState, useEffect } from "react";
+import SidebarItem from "./SidebarItem";
+import { ChevronsLeft, Menu } from 'lucide-react';
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
+import Logo from "@/assets/svg/Logo";
+import { items } from "./LinkItems";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function Sidebar({ toggle, setToggle }) {
    const [openItems, setOpenItems] = useState({});
+   const [isOpen, setIsOpen] = useState(false);
+
    const handleToggle = (label) => {
       setOpenItems((prev) => ({ ...prev, [label]: !prev[label] }));
    };
 
-   const items = [
-      {
-         to: "/notifications",
-         label: "Notifications",
 
-         icon: <Bell />,
-      },
-   ];
+
+   const SidebarContent = () => (
+      <div className="flex  scroll-smooth flex-col h-full bg-white dark:bg-gray-800">
+         <div className="flex items-center justify-between py-4 ps-4">
+            <Logo className="w-32" />
+            <Button
+               variant="ghost"
+               onClick={() => setToggle(!toggle)}
+               className="hidden !px-2 p-0 lg:block"
+            >
+               <ChevronsLeft className="h-6 w-6" />
+            </Button>
+         </div>
+         <ScrollArea className="flex-1 px-4 pb-8 scroll-smooth ">
+            <div className="!grid  !gap-2">
+               {items.map((item, index) => (
+                  <SidebarItem
+                     key={index}
+                     to={item.to}
+                     label={item.label}
+                     isOpen={!!openItems[item.label]}
+                     onToggle={() => handleToggle(item.label)}
+                     icon={item.icon}
+                     subItems={item.subItems}
+                  />
+               ))}
+            </div>
+         </ScrollArea>
+      </div>
+   );
+
+   useEffect(() => {
+      const handleResize = () => {
+         if (window.innerWidth >= 1024) {
+            setIsOpen(false);
+            setToggle(false);
+         }
+      };
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+   }, [setToggle]);
 
    return (
-      <div className="w-[300px]  pb-6  bg-lightDark  flex flex-col  h-screen overflow-hidden   ">
-         <button
-            onClick={() => setToggle(!toggle)}
-            className="absolute bg-lightOrange   text-nOrange rounded-s-full p-3 text-bold right-0 top-5">
-            <ArrowLeftToLine size={16} />
-         </button>
-         <div className="flex items-center mb-6 w-full flex-col py-2 overflow-hidden  justify-center px-4  ">
-            <div className="w-full flex items-center gap-6 justify-start py-2">
-               {/* <img src={logo} alt="" className="max-w-[120px]" /> */} logo
-            </div>
+      <>
+         <Sheet open={isOpen} onOpenChange={setIsOpen}>
+            <SheetTrigger asChild>
+               <Button
+                  variant="ghost"
+                  size="icon"
+                  className="lg:hidden fixed left-4 top-4 z-40"
+               >
+                  <Menu className="h-6 w-6" />
+               </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="p-0 w-[300px]">
+               <SidebarContent />
+            </SheetContent>
+         </Sheet>
 
+         <div className="hidden lg:block top-0 left-0 w-[300px] h-screen">
+            <SidebarContent />
          </div>
-
-         <div className="px-4  space-y-6 max-h-[60vh] overflow-auto custom-scrollbar pb-6">
-            {items.map((item, index) => (
-               <SidebarItem
-                  key={index}
-                  to={item.to}
-                  label={item.label}
-                  subItems={item.subItems}
-                  isOpen={!!openItems[item.label]}
-                  onToggle={() => handleToggle(item.label)}
-                  icon2={item.icon2}
-                  icon={item.icon}
-                  hoverIcon={item.hoverIcon}
-               />
-            ))}
-         </div>
-
-         <div className="mt-auto ps-[18px] pe-[12px] w-full">
-            <ProfileMenu />
-         </div>
-      </div>
+      </>
    );
 }

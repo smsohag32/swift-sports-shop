@@ -18,10 +18,10 @@ const DashboardLayout = ({ children }) => {
          </div>
          <div className={` w-full duration-500  transition-all transform  ${toggle ? "lg:pl-0 pl-[300px]" : "lg:pl-[300px] pl:0"
             }`}>
-            <div className="w-full px-6 sticky top-0 left-0 right-0">
+            <div className="w-full sticky top-0 left-0 right-0">
                <TopBar toggle={toggle} setToggle={setToggle} />
             </div>
-            <div className="px-6 py-4">
+            <div className="px-4 py-4">
                {children}
             </div>
          </div>

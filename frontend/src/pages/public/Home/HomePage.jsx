@@ -5,7 +5,7 @@ import WhyChoose from "./WhyChoose";
 
 const HomePage = () => {
    return (
-      <div>
+      <div className="relative overflow-hidden" >
          <Hero />
          <ProductSection />
          <WhyChoose />

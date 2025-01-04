@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Button } from "../ui/button";
 
-const VmAlert = ({ isOpen, message, description, handleClose, handleConfirm }) => {
+const VmAlert = ({ isOpen, isLoading, message, description, handleClose, handleConfirm }) => {
    return (
       <AlertDialog open={isOpen} onOpenChange={handleClose} >
          <AlertDialogContent>
@@ -23,7 +23,7 @@ const VmAlert = ({ isOpen, message, description, handleClose, handleConfirm }) =
             </AlertDialogHeader>
             <AlertDialogFooter>
                <AlertDialogCancel>Cancel</AlertDialogCancel>
-               <Button onClick={handleConfirm}>Continue</Button>
+               <Button disabled={isLoading} className="disabled:opacity-40" onClick={handleConfirm}>Continue</Button>
             </AlertDialogFooter>
          </AlertDialogContent>
       </AlertDialog>

@@ -14,7 +14,7 @@ const CustomPagination = ({ currentPage, totalPages, onPageChange }) => {
             pageNumbers.push(i);
          }
       } else {
-         pageNumbers.push(1); // Always show the first page
+         pageNumbers.push(1);
 
          if (currentPage > sidePages + 2) {
             pageNumbers.push("...");
@@ -43,7 +43,7 @@ const CustomPagination = ({ currentPage, totalPages, onPageChange }) => {
             <button
                key={index}
                onClick={() => handleClick(page)}
-               className={`px-4 py-2 border border-gray-300 ${currentPage === page ? "primary-bg text-white" : ""
+               className={`px-3 text-sm font-normal py-1 border rounded-md border-gray-300 ${currentPage === page ? "bg-darkOrange text-white" : ""
                   }`}
             >
                {page}
@@ -54,17 +54,17 @@ const CustomPagination = ({ currentPage, totalPages, onPageChange }) => {
 
    return (
       <div className="flex mt-auto items-center flex-wrap  justify-center lg:justify-between px-2">
-         <div className="hidden lg:flex items-center gap-2">
-            <p>Show items per page :</p>{" "}
-            <button className="px-2 py-1 border border-gray-300 bg-gray-100 rounded-l-md">
-               10
+         <div className="hidden text-sm font-normal text-des lg:flex items-center gap-2">
+            <p>Total: </p>{" "}
+            <button className="">
+               {totalPages * 6}
             </button>
          </div>
          <div className="flex justify-center gap-2 mt-4">
             <button
                disabled={currentPage === 1}
                onClick={() => handleClick(currentPage - 1)}
-               className="px-4 py-2 border border-gray-300 rounded-l-md"
+               className="px-4 py-1 disabled:opacity-50 disabled:cursor-not-allowed text-sm border border-gray-300 rounded-l-md"
             >
                Previous
             </button>
@@ -72,7 +72,7 @@ const CustomPagination = ({ currentPage, totalPages, onPageChange }) => {
             <button
                disabled={currentPage === totalPages}
                onClick={() => handleClick(currentPage + 1)}
-               className="px-4 py-2 border border-gray-300 rounded-r-md"
+               className="px-4 py-1 disabled:opacity-50 disabled:cursor-not-allowed text-sm border border-gray-300 rounded-r-md"
             >
                Next
             </button>

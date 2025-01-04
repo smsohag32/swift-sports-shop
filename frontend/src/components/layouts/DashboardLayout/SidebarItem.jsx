@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
-const SidebarItem = ({ to, label, subItems, isOpen, onToggle, icon, hoverIcon, icon2 }) => {
+const SidebarItem = ({ to, label, subItems, isOpen, onToggle, icon }) => {
    const navigate = useNavigate();
    const { pathname } = useLocation();
 
@@ -39,8 +39,8 @@ const SidebarItem = ({ to, label, subItems, isOpen, onToggle, icon, hoverIcon, i
             onClick={handleClick}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            className={`text-[16px] group whitespace-nowrap transition-all w-full font-normal  py-[10px] ps-[18px] pe-[12px] cursor-pointer
-               ${isActive ? "bg-[#DEDEDE]  text-[#202020] " : " text-grayWhite"}`}
+            className={`text-[16px] rounded-[4px] group whitespace-nowrap transition-all w-full font-medium py-[12px] ps-[20px] pe-[14px] cursor-pointer
+               ${isActive ? "bg-title text-primaryOrange shadow-md" : "text-title hover:bg-gray-200 hover:text-title"}`}
          >
             <div className="w-full bg-transparent">
                <div className="flex items-center w-full bg-transparent gap-[16px] h-full">
@@ -51,7 +51,7 @@ const SidebarItem = ({ to, label, subItems, isOpen, onToggle, icon, hoverIcon, i
                   {subItems && (
                      <span
                         className={`flex items-center transition-all duration-300 transform justify-center ml-auto
-                           ${isActive ? "primary-text" : ""} ${!isOpen ? "rotate-180" : ""}`}
+                           ${isActive ? "text-white" : "text-title"} ${!isOpen ? "rotate-180" : "rotate-0"}`}
                      >
                         <svg
                            width="14"
@@ -78,7 +78,7 @@ const SidebarItem = ({ to, label, subItems, isOpen, onToggle, icon, hoverIcon, i
                className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"}`}
                style={{ transitionTimingFunction: "ease-in-out" }}
             >
-               <div className="w-full grid gap-1">
+               <div className="w-full grid gap-2">
                   {subItems?.map((subItem, index) => {
                      const subItemActive =
                         isSubActive(subItem.to) ||
@@ -88,13 +88,11 @@ const SidebarItem = ({ to, label, subItems, isOpen, onToggle, icon, hoverIcon, i
                         <div key={index} className="w-full">
                            <div onClick={() => toggleResubItems(index)}>
                               <NavLink
-                                 className={`rounded-[4px] whitespace-nowrap text-[16px] font-normal pl-[34px] flex items-center gap-[16px] py-[10px] pe-[12px] cursor-pointer
-                                    ${subItemActive ? "bg-[#E9FFF4] border-b-[#006837] " : ""}
-                                    hover:bg-[#E9FFF4] `}
-
+                                 className={` rounded-[4px] whitespace-nowrap text-[15px] font-normal pl-[40px] flex items-center gap-[14px] py-[10px] pe-[12px] cursor-pointer
+                                    ${subItemActive ? "bg-slate-200 text-primaryOrange " : "text-title hover:bg-gray-200 hover:text-title"}`}
                                  to={subItem.to}
                               >
-                                 <span className={subItemActive ? "text-[#006837]" : ""}> {subItem.icon}</span> {subItem.label}
+                                 <span className={subItemActive ? "text-primaryOrange" : "text-title"}> {subItem.icon}</span> {subItem.label}
                               </NavLink>
                            </div>
                         </div>

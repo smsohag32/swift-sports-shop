@@ -20,9 +20,14 @@ import {
 import Logo from '@/assets/svg/Logo'
 import { categories } from '@/utils/data'
 import { Card } from '@/components/ui/card'
+import useAuth from '@/hooks/useAuth'
+import { ProfileMenu } from '../DashboardLayout/ProfileMenu'
+import { UserProfileMenu } from './UserProfileMenu'
+import HeaderCarts from '@/pages/public/Carts/HeaderCarts'
 
 const Header = () => {
    const [isScrolled, setIsScrolled] = useState(false)
+   const { user } = useAuth()
    const navigate = useNavigate()
    useEffect(() => {
       const handleScroll = () => {
@@ -39,13 +44,13 @@ const Header = () => {
          href: '/products',
          subItems: categories.map(category => ({ name: category.name, href: `/product/${category.name.toLowerCase()}`, img: category.image }))
       },
-      { name: 'About', href: '/about' },
+      { name: 'About', href: '/about-us' },
       { name: 'Contact', href: '/contact' },
    ]
 
    return (
       <motion.header
-         className={`fixed w-full py-3 z-50 flex items-center transition-all duration-300 ${isScrolled ? 'shadow-sm  bg-whiteBg' : ' bg-[#f3f3f3]'
+         className={`fixed w-full py-3 z-50 flex  items-center transition-all duration-300 ${isScrolled ? 'shadow-sm  bg-whiteBg' : ' bg-[#f3f3f3]'
             }`}
          initial={{ y: -100 }}
          animate={{ y: 0 }}
@@ -114,15 +119,23 @@ const Header = () => {
             </NavigationMenu>
 
             <div className="flex items-center space-x-4">
-               <Button variant="ghost" size="icon" className=" hover:text-[#FF4500]">
-                  <ShoppingCart className="h-5 w-5" />
-               </Button>
+               <HeaderCarts />
 
-               <Button variant="outline" size="sm" className="hidden md:flex text-base font-medium items-center space-x-2  hover:text-[#FF4500] hover:border-[#FF4500]">
-                  <LogIn className="h-4 w-4" />
-                  <span>Sign In</span>
-               </Button>
-
+               {user?.role === "user" ? (
+                  <ProfileMenu adminView={true} />
+               ) : user?.role === "admin" ? (
+                  <UserProfileMenu />
+               ) : (
+                  <Button
+                     onClick={() => navigate("/authentication/login")}
+                     variant="outline"
+                     size="sm"
+                     className="hidden md:flex text-base font-medium items-center space-x-2 hover:text-[#FF4500] hover:border-[#FF4500]"
+                  >
+                     <LogIn className="h-4 w-4" />
+                     <span>Sign In</span>
+                  </Button>
+               )}
                <Sheet>
                   <SheetTrigger asChild>
                      <Button variant="ghost" size="icon" className=" hover:text-[#FF4500] md:hidden">
@@ -154,10 +167,24 @@ const Header = () => {
                               </motion.span>
                            </NavLink>
                         ))}
-                        <Button onClick={() => navigate("/authentication/login")} variant="outline" size="sm" className="mt-8 w-full flex items-center justify-center space-x-2  hover:text-[#FF4500] hover:border-[#FF4500]">
-                           <LogIn className="h-4 w-4" />
-                           <span>Sign In</span>
-                        </Button>
+
+                        {user?.role === "admin" ? (
+                           <ProfileMenu adminView={true} />
+                        ) : user?.role === "user" ? (
+                           <ProfileMenu />
+                        ) : (
+                           <Button
+                              onClick={() => navigate("/authentication/login")}
+                              variant="outline"
+                              size="sm"
+                              className="hidden md:flex text-base font-medium items-center space-x-2 hover:text-[#FF4500] hover:border-[#FF4500]"
+                           >
+                              <LogIn className="h-4 w-4" />
+                              <span>Sign In</span>
+                           </Button>
+                        )}
+
+
                      </nav>
                   </SheetContent>
                </Sheet>

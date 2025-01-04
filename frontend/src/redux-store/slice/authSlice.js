@@ -1,11 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-import { setCookie, deleteCookie } from "./cookieUtils";
 import { loginApi } from "../api/loginApi";
+import { deleteCookie, getCookie, setCookie } from "@/utils/helper";
+const getPersistedToken = getCookie("access_token");
+const getPersistedUser = JSON.parse(getCookie("shop_user"));
 
 const initialState = {
-   token: null,
-   user: null,
+   token: getPersistedToken || null,
+   user: getPersistedUser || null,
    isLoading: false,
    error: null,
 };
@@ -15,7 +17,7 @@ export const loginUser = createAsyncThunk(
    async (credentials, { rejectWithValue }) => {
       try {
          const response = await loginApi(credentials);
-         return response;
+         return response?.data;
       } catch (error) {
          return rejectWithValue(error.message || "Login failed");
       }
@@ -30,8 +32,8 @@ const authSlice = createSlice({
       logoutUser: (state) => {
          state.token = null;
          state.user = null;
-         deleteCookie("token");
-         deleteCookie("user");
+         deleteCookie("access_token");
+         deleteCookie("shop_user");
       },
    },
    extraReducers: (builder) => {
@@ -42,13 +44,11 @@ const authSlice = createSlice({
          })
          .addCase(loginUser.fulfilled, (state, action) => {
             const { token, user } = action.payload;
-
             state.isLoading = false;
             state.token = token;
             state.user = user;
-
-            if (token) setCookie("token", token);
-            if (user) setCookie("user", JSON.stringify(user));
+            if (token) setCookie("access_token", token);
+            if (user) setCookie("shop_user", JSON.stringify(user));
          })
          .addCase(loginUser.rejected, (state, action) => {
             state.isLoading = false;
