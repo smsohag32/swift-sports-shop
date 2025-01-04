@@ -58,7 +58,6 @@ export const getCategoryById = async (req, res) => {
    }
 };
 
-// Update a category by ID
 export const updateCategory = async (req, res) => {
    try {
       const { id } = req.params;
@@ -74,21 +73,31 @@ export const updateCategory = async (req, res) => {
          return res.status(404).json({ message: "Category not found." });
       }
 
-      let image = category.image;
+      let image = category?.image;
+
       if (req.file) {
+         // Delete old image if exists
          if (image) {
             await deleteImageFromCloud([image]);
          }
-         image = await uploadImageToCloud([req.file]);
+         // Upload new image
+         const uploadedImages = await uploadImageToCloud([req.file]);
+         image = uploadedImages[0]; // Use the first uploaded image URL
       }
+
       const updatedCategory = await Category.findByIdAndUpdate(
          id,
-         { name, description, image, updatedAt: Date.now() },
+         {
+            name,
+            description,
+            image,
+            updatedAt: Date.now(),
+         },
          { new: true, runValidators: true }
       );
 
       if (!updatedCategory) {
-         return res.status(404).json({ message: "Category not found." });
+         return res.status(404).json({ message: "Failed to update category." });
       }
 
       res.status(200).json({ category: updatedCategory });
