@@ -19,11 +19,7 @@ export const items = [
    {
       to: "/dashboard/categories",
       label: "Categories",
-      icon: <Tags className="h-5 w-5" />,
-      subItems: [
-         { to: "/dashboard/categories/sports", icon: <Dot />, label: "Sportswear" },
-         { to: "/dashboard/categories/equipment", icon: <Dot />, label: "Equipment" },
-      ]
+      icon: <Tags className="h-5 w-5" />
    },
    {
       to: "/dashboard/customers",
