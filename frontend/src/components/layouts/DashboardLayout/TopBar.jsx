@@ -1,6 +1,7 @@
 import { Dot } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { ProfileMenu } from './ProfileMenu';
+import Logo from '@/assets/svg/Logo';
 
 const FullscreenButton = () => {
    const [isFullscreen, setIsFullscreen] = useState(false);
@@ -58,7 +59,7 @@ export default function TopBar({ toggle, setToggle }) {
 
          }}
       >
-         {toggle && <div className='flex items-center gap-8'>
+         {toggle && <div className='flex items-center  gap-8'>
             <button onClick={() => setToggle(!toggle)} className="">
                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M3 12H21M3 6H21M3 18H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -66,11 +67,14 @@ export default function TopBar({ toggle, setToggle }) {
             </button>
          </div>}
 
-         <div className="relative w-full max-w-sm">
+         <div className='flex ms-10 lg:hidden pe-3 items-center  gap-8'>
+            <Logo className='w-24' />
+         </div>
+         <div className="relative lg:block w-full hidden  lg:max-w-sm">
             <input
                type="text"
                placeholder="Search"
-               className="py-[10px] border border-slate-200 shadow-sm ps-[50px] bg-transparent transition-all duration-300 focus:!bg-[#f6f6f6] !bg-opacity-10 backdrop-blur-lg pe-5  w-full outline-none  rounded-[4px]"
+               className="lg:py-[10px] py-2 border border-slate-200 shadow-sm ps-[50px] bg-transparent transition-all duration-300 focus:!bg-[#f6f6f6] !bg-opacity-10 backdrop-blur-lg pe-5  w-full outline-none  rounded-[4px]"
             />
             <span className="absolute left-4 transform -translate-y-1/2 top-1/2 ">
                <svg
