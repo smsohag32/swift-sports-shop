@@ -39,8 +39,8 @@ const SidebarItem = ({ to, label, subItems, isOpen, onToggle, icon }) => {
             onClick={handleClick}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            className={`text-[16px] group whitespace-nowrap transition-all w-full font-medium py-[12px] ps-[20px] pe-[14px] cursor-pointer
-               ${isActive ? "bg-title text-white shadow-md" : "text-title hover:bg-gray-200 hover:text-title"}`}
+            className={`text-[16px] rounded-[4px] group whitespace-nowrap transition-all w-full font-medium py-[12px] ps-[20px] pe-[14px] cursor-pointer
+               ${isActive ? "bg-title text-primaryOrange shadow-md" : "text-title hover:bg-gray-200 hover:text-title"}`}
          >
             <div className="w-full bg-transparent">
                <div className="flex items-center w-full bg-transparent gap-[16px] h-full">
@@ -88,11 +88,11 @@ const SidebarItem = ({ to, label, subItems, isOpen, onToggle, icon }) => {
                         <div key={index} className="w-full">
                            <div onClick={() => toggleResubItems(index)}>
                               <NavLink
-                                 className={`rounded-[6px] whitespace-nowrap text-[15px] font-normal pl-[40px] flex items-center gap-[14px] py-[10px] pe-[12px] cursor-pointer
-                                    ${subItemActive ? "bg-title text-darkOrange" : "text-title hover:bg-gray-200 hover:text-title"}`}
+                                 className={` rounded-[4px] whitespace-nowrap text-[15px] font-normal pl-[40px] flex items-center gap-[14px] py-[10px] pe-[12px] cursor-pointer
+                                    ${subItemActive ? "bg-slate-200 text-primaryOrange " : "text-title hover:bg-gray-200 hover:text-title"}`}
                                  to={subItem.to}
                               >
-                                 <span className={subItemActive ? "text-darkOrange" : "text-title"}> {subItem.icon}</span> {subItem.label}
+                                 <span className={subItemActive ? "text-primaryOrange" : "text-title"}> {subItem.icon}</span> {subItem.label}
                               </NavLink>
                            </div>
                         </div>

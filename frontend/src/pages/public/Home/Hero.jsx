@@ -3,13 +3,14 @@
 import { motion } from 'framer-motion'
 import { Button } from "@/components/ui/button"
 import { ShoppingCart, TrendingUp, Award, Zap, ShoppingBasketIcon as Basketball } from 'lucide-react'
-import heroSports from "@/assets/sports/image.webp"
+import heroSports from "@/assets/sports/hero.webp"
+import ball from "@/assets/sports/ball.png"
 const Hero = () => {
    return (
       <div className=" min-h-[480px]  flex items-center bg-gradient-to-b from-[#f3f3f3] to-transparent  overflow-hidden">
 
          <div className='flex   relative items-center lg:py-10 py-16 flex-col lg:flex-row lg:gap-0 gap-8 w-full main-container'>
-            <AnimatedIcon Icon={Basketball} className="bottom-0 right-10" />
+            <AnimatedIcon Icon={Basketball} className="bottom-2/4 hidden lg:block right-1/3" />
             <motion.div
                initial={{ opacity: 0, x: -50 }}
                animate={{ opacity: 1, x: 0 }}
@@ -75,7 +76,7 @@ const FeatureItem = ({ icon: Icon, text }) => (
    </motion.div>
 )
 
-const AnimatedIcon = ({ Icon, className }) => (
+const AnimatedIcon = ({ className }) => (
    <motion.div
       className={`absolute ${className}`}
       initial={{ opacity: 0, scale: 0.8, rotateY: 0 }}
@@ -95,7 +96,7 @@ const AnimatedIcon = ({ Icon, className }) => (
          transformStyle: 'preserve-3d',
       }}
    >
-      <Icon size={48} className="text-darkOrange" />
+      <img src={ball} className='w-20' alt="Ball" />
    </motion.div>
 )
 

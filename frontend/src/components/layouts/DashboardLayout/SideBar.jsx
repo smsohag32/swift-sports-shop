@@ -7,6 +7,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import Logo from "@/assets/svg/Logo";
 import { items } from "./LinkItems";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function Sidebar({ toggle, setToggle }) {
    const [openItems, setOpenItems] = useState({});
@@ -30,19 +31,21 @@ export default function Sidebar({ toggle, setToggle }) {
                <ChevronsLeft className="h-6 w-6" />
             </Button>
          </div>
-         <div className="flex-1 overflow-auto py-4 space-y-2">
-            {items.map((item, index) => (
-               <SidebarItem
-                  key={index}
-                  to={item.to}
-                  label={item.label}
-                  isOpen={!!openItems[item.label]}
-                  onToggle={() => handleToggle(item.label)}
-                  icon={item.icon}
-                  subItems={item.subItems}
-               />
-            ))}
-         </div>
+         <ScrollArea className="flex-1 px-4 pb-8 scroll-smooth ">
+            <div className="!grid  !gap-2">
+               {items.map((item, index) => (
+                  <SidebarItem
+                     key={index}
+                     to={item.to}
+                     label={item.label}
+                     isOpen={!!openItems[item.label]}
+                     onToggle={() => handleToggle(item.label)}
+                     icon={item.icon}
+                     subItems={item.subItems}
+                  />
+               ))}
+            </div>
+         </ScrollArea>
       </div>
    );
 

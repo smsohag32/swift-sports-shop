@@ -2,6 +2,7 @@
 import Dashboard from "@/layouts/Dashboard";
 import Main from "@/layouts/Main";
 import Login from "@/pages/authentication/Login";
+import Registration from "@/pages/authentication/Registration";
 import Categories from "@/pages/dashboard/Categories/Categories";
 import Overview from "@/pages/dashboard/Overview/Overview";
 import ManageProducts from "@/pages/dashboard/Products/ManageProducts";
@@ -32,6 +33,10 @@ export const router = createBrowserRouter([
             path: "/authentication/login",
             element: <Login />,
          },
+         {
+            path: "/authentication/registration",
+            element: <Registration />,
+         },
       ],
    },
    {
@@ -48,6 +53,18 @@ export const router = createBrowserRouter([
          },
          {
             path: "/dashboard/products",
+            element: <ManageProducts />,
+         },
+         {
+            path: "/dashboard/products/all",
+            element: <ManageProducts />,
+         },
+         {
+            path: "/dashboard/products/new",
+            element: <ManageProducts />,
+         },
+         {
+            path: "/dashboard/products/inventory",
             element: <ManageProducts />,
          },
       ],
