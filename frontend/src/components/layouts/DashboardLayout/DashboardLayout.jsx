@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 
-import TopBar from "./Topbar";
-import Sidebar from "./Sidebar";
 import { Toaster } from "../../ui/sonner";
 import { ScrollRestoration } from "react-router-dom";
+import Sidebar from "./SideBar";
+import TopBar from "./TopBar";
 
 const DashboardLayout = ({ children }) => {
    const [toggle, setToggle] = useState(false)
