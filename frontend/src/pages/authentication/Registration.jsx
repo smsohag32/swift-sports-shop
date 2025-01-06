@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { toast } from 'sonner'
+import Logo from '@/assets/svg/Logo'
 
 const RegistrationPage = () => {
    const { register, handleSubmit, formState: { errors, isValid }, watch } = useForm({
@@ -27,9 +28,10 @@ const RegistrationPage = () => {
    }
 
    return (
-      <div className="min-h-screen bg-gradient-to-br from-indigo-100 to-white flex items-center justify-center p-4">
+      <div className="min-h-screen bg-[f3f3f3] flex items-center justify-center p-4">
          <Card className="w-full max-w-md">
             <CardHeader className="space-y-1">
+               <div> <Logo /></div>
                <CardTitle className="text-2xl font-bold text-center">Create an Account</CardTitle>
                <CardDescription className="text-center">
                   Enter your details below to create your account and get started
