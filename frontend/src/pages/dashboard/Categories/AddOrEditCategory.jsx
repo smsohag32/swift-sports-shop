@@ -37,7 +37,7 @@ const AddOrEditCategory = ({ isOpen, setOpen, selectedCategory, refetch }) => {
          formData.append("content", JSON.stringify(data))
          if (file) {
             formData.append("image", file)
-         }
+      }
          if (selectedCategory) {
             await editCategory({ id: selectedCategory?._id, formData })
             handleClose()

@@ -32,13 +32,13 @@ const Hero = () => {
                      View Deals
                   </Button>
                </div>
-               <div className="flex gap-8 justify-center lg:justify-start">
+               <div className="flex gap-8 justify-center flex-col lg:flex-row lg:justify-start">
                   <FeatureItem icon={TrendingUp} text="Top Brands" />
                   <FeatureItem icon={Award} text="Quality Gear" />
                   <FeatureItem icon={Zap} text="Fast Delivery" />
                </div>
             </motion.div>
-            <div className=" flex items-center w-full pt-10 lg:pt-0 lg:justify-center relative">
+            <div className=" flex items-center  w-full pt-10 lg:pt-0 lg:justify-center relative">
                <div className='w-4/5'>
                   <motion.img initial={{ opacity: 1, scale: 0.8, rotateY: 0 }}
                      animate={{
