@@ -6,7 +6,6 @@ const VmModal = ({ isOpen, handleClose, title, size, children }) => {
    const isDesktop = useMediaQuery("(min-width: 768px)");
 
 
-
    if (isDesktop) {
       return <Dialog open={isOpen} onOpenChange={handleClose}>
          <DialogContent className="w-full"
@@ -24,14 +23,13 @@ const VmModal = ({ isOpen, handleClose, title, size, children }) => {
 
    return (
       <Drawer open={isOpen} onOpenChange={handleClose}>
-
          <DrawerContent className="w-full"
             style={{ maxWidth: size || "auto" }}>
-            <div className="mx-auto w-full max-w-sm">
+            <div className=" w-full">
                <DrawerHeader className={"border-b"}>
-                  <DrawerTitle className=" pt-4 pb-4">{title}</DrawerTitle>
+                  <DrawerTitle className=" pt-4 px-2 pb-4">{title}</DrawerTitle>
                </DrawerHeader>
-               <div className="  w-full  pt-6 pb-6 max-h-[85vh] overflow-y-auto">
+               <div className="  w-full px-6 pt-6 pb- max-h-[70vh] overflow-y-auto">
                   {children}
                </div>
             </div>
