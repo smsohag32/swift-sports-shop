@@ -33,12 +33,12 @@ const productSchema = new mongoose.Schema({
    ],
    stock: {
       type: Number,
-      required: true,
+   required: true,
       min: 0,
    },
    category: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Category",
+      ref: "categories",
       required: true,
    },
    images: [

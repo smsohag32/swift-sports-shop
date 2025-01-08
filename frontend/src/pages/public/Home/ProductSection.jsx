@@ -1,39 +1,39 @@
+
+import ProductCard from "@/components/cards/ProductCard";
+import { useGetAllProductQuery } from "@/redux-store/api/productApi";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { featuredProducts } from "@/utils/data";
-import { Star } from "lucide-react";
+import { ChevronRight } from 'lucide-react';
+import ProductCardSkeleton from "@/components/skeleton/ProductSkeleton";
 
 const ProductSection = () => {
+   const { data: productData, isLoading } = useGetAllProductQuery();
+
+   const filteredProducts = productData?.products
+
+   const skeletonArray = Array(8).fill(null);
+
    return (
       <section className="py-16">
          <div className="main-container">
-
-            <h2 className=" text-2xl lg:text-[36px] text-title  font-medium text-center mb-12">Featured Products</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-               {featuredProducts.map((product) => (
-                  <Card key={product.id} className="border-slate-100">
-                     <CardHeader className="p-0">
-                        {product?.image ? <img
-                           src={product.image}
-                           alt={product.name}
-                           width={400}
-                           height={300}
-                           className="w-full h-48 object-cover"
-                        /> : <div className="w-full h-48 bg-slate-300"></div>}
-                     </CardHeader>
-                     <CardContent className="p-4">
-                        <CardTitle className="text-2xl font-normal text-title mb-2 ">{product.name}</CardTitle>
-                        <p className="text-2xl font-bold text-orange-600">${product.price.toFixed(2)}</p>
-                        <div className="flex items-center mt-2">
-                           <Star className="w-5 h-5 text-orange-400 fill-current" />
-                           <span className="ml-1 text-sm text-orange-700">{product.rating}</span>
-                        </div>
-                     </CardContent>
-                     <CardFooter>
-                        <Button className="w-full bg-title hover:bg-des  text-white ">Add to Cart</Button>
-                     </CardFooter>
-                  </Card>
-               ))}
+            <div className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
+               <h2 className="text-2xl lg:text-[36px] text-title font-medium text-center mb-12">
+                  Featured Products
+               </h2>
+               <Button variant="outline" className="w-full sm:w-auto">
+                  See All <ChevronRight />
+               </Button>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+               {isLoading
+                  ? skeletonArray.map((_, index) => (
+                     <ProductCardSkeleton key={index} />
+                  ))
+                  : filteredProducts && filteredProducts.length > 0
+                     ? filteredProducts.map((product) => (
+                        <ProductCard product={product} key={product?._id} />
+                     ))
+                     : <div className="col-span-full text-center text-gray-500">No products found.</div>
+               }
             </div>
          </div>
       </section>
@@ -41,3 +41,4 @@ const ProductSection = () => {
 };
 
 export default ProductSection;
+

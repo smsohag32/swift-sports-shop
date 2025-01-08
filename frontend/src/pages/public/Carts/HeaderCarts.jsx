@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Plus, Minus, X } from 'lucide-react';
 import {
@@ -8,43 +9,54 @@ import {
    SheetHeader,
    SheetTitle,
    SheetFooter,
+   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { removeFromCart, updateQuantity } from '@/redux-store/slice/cartSlice';
+import { toast } from 'sonner';
 
 const HeaderCarts = () => {
    const [isOpen, setIsOpen] = useState(false);
-   const [cartItems, setCartItems] = useState([
-      { id: 1, name: "Sport Shoes", price: 89.99, quantity: 1, image: "" },
-      { id: 2, name: "Running Shorts", price: 29.99, quantity: 2, image: "" },
-      { id: 3, name: "Workout T-Shirt", price: 24.99, quantity: 1, image: "" },
-   ]);
+   const dispatch = useDispatch();
+   const { cartItems, totalQuantity, totalCost } = useSelector((state) => state.cart);
 
-   const updateQuantity = (id, change) => {
-      setCartItems(cartItems.map(item =>
-         item.id === id ? { ...item, quantity: Math.max(0, item.quantity + change) } : item
-      ).filter(item => item.quantity > 0));
+   const handleUpdateQuantity = (id, change) => {
+      const item = cartItems.find(item => item._id === id);
+      if (item) {
+         const newQuantity = Math.max(0, item.quantity + change);
+         if (newQuantity === 0) {
+            dispatch(removeFromCart(id));
+            toast.success("Item removed from cart");
+         } else {
+            dispatch(updateQuantity({ _id: id, quantity: newQuantity }));
+            toast.success("Cart updated");
+         }
+      }
    };
 
-   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-   const totalCost = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+   const handleRemoveItem = (id) => {
+      dispatch(removeFromCart(id));
+      toast.success("Item removed from cart");
+   };
 
    return (
       <div>
-         <Button
-            variant="ghost"
-            size="icon"
-            className="relative hover:text-[#FF4500]"
-            onClick={() => setIsOpen(true)}
-         >
-            <ShoppingCart className="h-5 w-5" />
-            {totalItems > 0 && (
-               <span className="absolute -top-1 -right-1 bg-[#FF4500] text-white text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center">
-                  {totalItems}
-               </span>
-            )}
-         </Button>
          <Sheet open={isOpen} onOpenChange={setIsOpen}>
+            <SheetTrigger asChild>
+               <Button
+                  variant="ghost"
+                  size="icon"
+                  className="relative hover:text-[#FF4500]"
+               >
+                  <ShoppingCart className="h-5 w-5" />
+                  {totalQuantity > 0 && (
+                     <span className="absolute -top-1 -right-1 bg-[#FF4500] text-white text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center">
+                        {totalQuantity}
+                     </span>
+                  )}
+               </Button>
+            </SheetTrigger>
             <SheetContent className="w-full sm:max-w-lg">
                <SheetHeader>
                   <SheetTitle>My Cart</SheetTitle>
@@ -54,10 +66,17 @@ const HeaderCarts = () => {
                </SheetHeader>
                <ScrollArea className="h-[calc(100vh-20.5rem)] mt-4 pr-4">
                   {cartItems.map((item) => (
-                     <div key={item.id} className="flex items-center gap-4 py-4">
+                     <div key={item._id} className="flex items-center gap-4 py-4">
                         <div>
-                           {item?.image ? <img src={item.image} alt={item.name} className="h-20 w-20 rounded-md object-cover mr-4" />
-                              : <div className="bg-slate-200 h-20 w-20 rounded-md"></div>}
+                           {item?.images && item.images.length > 0 ? (
+                              <img
+                                 src={item.images[0].url}
+                                 alt={item.name}
+                                 className="h-20 w-20 rounded-md object-cover mr-4"
+                              />
+                           ) : (
+                              <div className="bg-slate-200 h-20 w-20 rounded-md"></div>
+                           )}
                         </div>
                         <div className="flex-1">
                            <h3 className="font-semibold text-sm">{item.name}</h3>
@@ -67,7 +86,7 @@ const HeaderCarts = () => {
                                  variant="outline"
                                  size="icon"
                                  className="h-8 w-8"
-                                 onClick={() => updateQuantity(item.id, -1)}
+                                 onClick={() => handleUpdateQuantity(item._id, -1)}
                               >
                                  <Minus className="h-4 w-4" />
                               </Button>
@@ -76,7 +95,7 @@ const HeaderCarts = () => {
                                  variant="outline"
                                  size="icon"
                                  className="h-8 w-8"
-                                 onClick={() => updateQuantity(item.id, 1)}
+                                 onClick={() => handleUpdateQuantity(item._id, 1)}
                               >
                                  <Plus className="h-4 w-4" />
                               </Button>
@@ -86,7 +105,7 @@ const HeaderCarts = () => {
                            variant="ghost"
                            size="icon"
                            className="h-8 w-8 text-gray-500 hover:text-red-500"
-                           onClick={() => updateQuantity(item.id, -item.quantity)}
+                           onClick={() => handleRemoveItem(item._id)}
                         >
                            <X className="h-4 w-4" />
                         </Button>
@@ -110,7 +129,8 @@ const HeaderCarts = () => {
                   </div>
                </div>
                <SheetFooter className="mt-6">
-                  <Button className="w-full bg-[#FF4500] hover:bg-[#FF6347]">
+                  {/* if cart items 0 then button will be disabled */}
+                  <Button disabled={cartItems?.length <= 0} className="w-full bg-[#FF4500] hover:bg-[#FF6347]">
                      Proceed to Checkout
                   </Button>
                </SheetFooter>
