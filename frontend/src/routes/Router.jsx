@@ -5,6 +5,7 @@ import Login from "@/pages/authentication/Login";
 import Registration from "@/pages/authentication/Registration";
 import Categories from "@/pages/dashboard/Categories/Categories";
 import Overview from "@/pages/dashboard/Overview/Overview";
+import AddProduct from "@/pages/dashboard/Products/AddProduct";
 import ManageProducts from "@/pages/dashboard/Products/ManageProducts";
 import NotFound from "@/pages/NotFound/NotFound";
 import Notifications from "@/pages/notifications/Notifications";
@@ -71,7 +72,7 @@ export const router = createBrowserRouter([
          },
          {
             path: "/dashboard/products/new",
-            element: <ManageProducts />,
+            element: <AddProduct />,
          },
          {
             path: "/dashboard/products/inventory",
