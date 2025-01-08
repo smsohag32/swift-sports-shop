@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { ShoppingCart, Menu, ChevronRight, LogIn, ChevronDown } from 'lucide-react'
+import { Menu, ChevronRight, LogIn, LogOut } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { NavLink, useNavigate } from 'react-router-dom'
 import {
    Sheet,
    SheetContent,
    SheetHeader,
-   SheetTitle,
    SheetTrigger,
 } from "@/components/ui/sheet"
 import {
@@ -24,9 +23,12 @@ import useAuth from '@/hooks/useAuth'
 import { ProfileMenu } from '../DashboardLayout/ProfileMenu'
 import { UserProfileMenu } from './UserProfileMenu'
 import HeaderCarts from '@/pages/public/Carts/HeaderCarts'
+import { logoutUser } from '@/redux-store/slice/authSlice'
+import { useDispatch } from 'react-redux'
 
 const Header = () => {
    const [isScrolled, setIsScrolled] = useState(false)
+   const dispatch = useDispatch()
    const { user } = useAuth()
    const navigate = useNavigate()
    useEffect(() => {
@@ -42,11 +44,18 @@ const Header = () => {
       {
          name: 'Products',
          href: '/products',
-         subItems: categories.map(category => ({ name: category.name, href: `/product/${category.name.toLowerCase()}`, img: category.image }))
+         subItems: categories.map(category => ({ name: category.name, href: `/products?category=${category.name.toLowerCase()}`, img: category.image }))
       },
       { name: 'About', href: '/about-us' },
       { name: 'Contact', href: '/contact' },
    ]
+
+
+   const handleLogout = async () => {
+      await dispatch(logoutUser())
+      navigate("/", { replace: true });
+   };
+
 
    return (
       <motion.header
@@ -146,7 +155,7 @@ const Header = () => {
                      <SheetHeader>
                         <Logo className='w-44' />
                      </SheetHeader>
-                     <nav className="mt-8">
+                     <nav className="mt-8 flex flex-col w-full min-h-[60vh]">
                         {navItems.map((item) => (
                            <NavLink
                               key={item.name}
@@ -169,15 +178,21 @@ const Header = () => {
                         ))}
 
                         {user?.role === "admin" ? (
-                           <ProfileMenu adminView={true} />
+                           <Button className="cursor-pointer absolute bottom-6  left-6   right-6 mt-auto" onClick={handleLogout}>
+                              <LogOut className="mr-2 h-4 w-4" />
+                              <span>Log out</span>
+                           </Button>
                         ) : user?.role === "user" ? (
-                           <ProfileMenu />
+                           <Button className="cursor-pointer" onClick={handleLogout}>
+                              <LogOut className="mr-2 h-4 w-4" />
+                              <span>Log out</span>
+                           </Button>
                         ) : (
                            <Button
                               onClick={() => navigate("/authentication/login")}
                               variant="outline"
                               size="sm"
-                              className="hidden md:flex text-base font-medium items-center space-x-2 hover:text-[#FF4500] hover:border-[#FF4500]"
+                              className="cursor-pointer absolute bottom-6  left-6   right-6 mt-auto"
                            >
                               <LogIn className="h-4 w-4" />
                               <span>Sign In</span>
