@@ -9,6 +9,7 @@ import ManageProducts from "@/pages/dashboard/Products/ManageProducts";
 import NotFound from "@/pages/NotFound/NotFound";
 import Notifications from "@/pages/notifications/Notifications";
 import About from "@/pages/public/About/About";
+import Contact from "@/pages/public/Contact/Contact";
 import HomePage from "@/pages/public/Home/HomePage";
 import Products from "@/pages/public/Products/Products/Products";
 import { createBrowserRouter } from "react-router-dom";
@@ -29,6 +30,10 @@ export const router = createBrowserRouter([
          {
             path: "/products",
             element: <Products />,
+         },
+         {
+            path: "/contact",
+            element: <Contact />,
          },
          {
             path: "/notifications",

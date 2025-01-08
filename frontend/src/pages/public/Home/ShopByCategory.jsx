@@ -8,6 +8,7 @@ import {
    CarouselNext,
    CarouselPrevious,
 } from "@/components/ui/carousel";
+import { Link } from 'react-router-dom';
 
 const ShopByCategory = () => {
    const { data: categoriesData } = useGetAllCategoryQuery();
@@ -40,7 +41,9 @@ const ShopByCategory = () => {
                               </CardHeader>
                               <CardContent className="p-4 text-center">
                                  <CardTitle className="text-lg hover:underline hover:text-complementaryBlue transition-all duration-300 cursor-pointer">
-                                    {category.name}
+                                    <Link to={`/products?category=${category?.name?.toLowerCase()}&id=${category?._id}`}>
+                                       {category.name}
+                                    </Link>
                                  </CardTitle>
                               </CardContent>
                            </Card>

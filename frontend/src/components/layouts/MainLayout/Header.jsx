@@ -25,8 +25,11 @@ import { UserProfileMenu } from './UserProfileMenu'
 import HeaderCarts from '@/pages/public/Carts/HeaderCarts'
 import { logoutUser } from '@/redux-store/slice/authSlice'
 import { useDispatch } from 'react-redux'
+import { useGetAllCategoryQuery } from '@/redux-store/api/categoryApi'
 
 const Header = () => {
+   const { data: categoriesData } = useGetAllCategoryQuery();
+
    const [isScrolled, setIsScrolled] = useState(false)
    const dispatch = useDispatch()
    const { user } = useAuth()
@@ -44,7 +47,7 @@ const Header = () => {
       {
          name: 'Products',
          href: '/products',
-         subItems: categories.map(category => ({ name: category.name, href: `/products?category=${category.name.toLowerCase()}`, img: category.image }))
+         subItems: categoriesData && categoriesData?.categories?.length > 0 ? categoriesData?.categories?.map(category => ({ name: category?.name, href: `/products?category=${category.name.toLowerCase()}&id=${category?._id}`, img: category.image })) : ""
       },
       { name: 'About', href: '/about-us' },
       { name: 'Contact', href: '/contact' },
@@ -107,10 +110,10 @@ const Header = () => {
                         )}
                         {item.subItems && (
                            <NavigationMenuContent className="">
-                              <ul className="grid w-[400px] max-w-3xl  lg:grid-cols-2 gap-3 p-4 bg-whiteBg shadow-md rounded-md">
+                              <ul className="grid w-[600px] max-w-3xl  lg:grid-cols-2 gap-3 p-4 bg-whiteBg shadow-md rounded-md">
                                  {item.subItems.map((subItem) => (
                                     <Card key={subItem.name} className="flex border-opacity-30 border-slate-300 border shadow-none items-center gap-3 px-4 py-3">
-                                       <img src={subItem?.img} className='w-10 h-10 object-cover' alt="" />
+                                       {subItem?.img ? <img src={subItem?.img} className='w-10 h-10 object-cover' alt="" /> : <div className='h-10 w-10 bg-slate-200'></div>}
                                        <NavLink
                                           to={subItem.href}
                                           className="block py-2 px-4 text-base font-medium rounded-md transition-colors hover:text-darkOrange hover:bg-opacity-20"
