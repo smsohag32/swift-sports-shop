@@ -13,6 +13,7 @@ import {
    NavigationMenu,
    NavigationMenuContent,
    NavigationMenuItem,
+   NavigationMenuLink,
    NavigationMenuList,
    NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
@@ -89,6 +90,7 @@ const Header = () => {
                   {navItems.map((item, index) => (
                      <NavigationMenuItem key={item.name}>
                         {item.subItems && item.subItems.length > 0 ? (
+
                            <NavigationMenuTrigger className="bg-transparent hover:bg-transparent">
                               <NavLink
                                  to={item.href}
@@ -121,12 +123,14 @@ const Header = () => {
                                  {item.subItems.map((subItem) => (
                                     <Card key={subItem.name} className="flex border-opacity-30 border-slate-300 border shadow-none items-center gap-3 px-4 py-3">
                                        {subItem?.img ? <img src={subItem?.img} className='w-10 h-10 object-cover' alt="" /> : <div className='h-10 w-10 bg-slate-200'></div>}
-                                       <NavLink
-                                          to={subItem.href}
-                                          className="block py-2 px-4 text-base font-medium rounded-md transition-colors hover:text-primaryOrange hover:bg-opacity-20"
-                                       >
-                                          {subItem.name}
-                                       </NavLink>
+                                       <NavigationMenuLink asChild>
+                                          <NavLink
+                                             to={subItem.href}
+                                             className="block py-2 px-4 text-base font-medium rounded-md transition-colors hover:text-primaryOrange hover:bg-opacity-20"
+                                          >
+                                             {subItem.name}
+                                          </NavLink>
+                                       </NavigationMenuLink>
                                     </Card>
                                  ))}
                               </ul>

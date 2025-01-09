@@ -85,14 +85,14 @@ const AddOrEditProduct = ({ isOpen, setOpen, selectedProduct, refetch }) => {
    const handleClose = () => {
       setOpen(false);
       reset();
-      setFiles(null);
+      setFiles([]);
       setImagePreview([]);
 
    };
 
    const handleFileChange = (e) => {
       const selectedFiles = Array.from(e.target.files);
-      setFiles(prevFiles => [...prevFiles, ...selectedFiles]);
+      setFiles(prevFiles => [...(prevFiles || []), ...selectedFiles]);
       selectedFiles.forEach(file => {
          const reader = new FileReader();
          reader.onloadend = () => {
@@ -115,7 +115,8 @@ const AddOrEditProduct = ({ isOpen, setOpen, selectedProduct, refetch }) => {
       e.preventDefault();
       setDragging(false);
       const droppedFiles = Array.from(e.dataTransfer.files);
-      setFiles(prevFiles => [...prevFiles, ...droppedFiles]);
+      setFiles(prevFiles => [...(prevFiles || []), ...droppedFiles]);
+
       droppedFiles.forEach(file => {
          const reader = new FileReader();
          reader.onloadend = () => {
