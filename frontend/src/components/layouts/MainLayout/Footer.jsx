@@ -4,9 +4,8 @@ import { Button } from "@/components/ui/button"
 import { Facebook, Twitter, Instagram, YoutubeIcon as YouTube } from 'lucide-react'
 import { Link } from "react-router-dom"
 import logo from "@/assets/sports/image2.png"
+import { toast } from "sonner"
 
-
-// footer component
 const Footer = () => {
    return (
       <footer className="bg-gray-900 text-whiteBg">
@@ -36,19 +35,18 @@ const Footer = () => {
                <div className="">
                   <h3 className="text-lg font-semibold mb-4">Stay Updated</h3>
                   <p className="text-gray-400 mb-2">Subscribe to our newsletter for the latest updates and offers.</p>
-                  <form className="flex flex-col lg:pt-2 sm:flex-row gap-4 lg:gap-2">
+                  <div className="flex flex-col lg:pt-2 sm:flex-row gap-4 lg:gap-2">
                      <Input
                         type="email"
                         placeholder="Enter your email"
                         className="bg-gray-800 text-whiteBg border-gray-700 focus:border-blue-500"
                      />
-                     <Button type="submit" className="bg-blue-600 hover:bg-blue-700 text-whiteBg">
+                     <Button type="button" onClick={() => toast.success("Subscribe successfully.")} type="submit" className="bg-blue-600 hover:bg-blue-700 text-whiteBg">
                         Subscribe
                      </Button>
-                  </form>
+                  </div>
                </div>
 
-               {/* Social Links */}
                <div className="flex flex-col items-end">
                   <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
                   <div className="flex space-x-4">

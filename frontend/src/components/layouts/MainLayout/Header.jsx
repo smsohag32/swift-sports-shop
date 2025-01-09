@@ -72,7 +72,7 @@ const Header = () => {
 
    return (
       <motion.header
-         className={`fixed w-full py-3  z-50 flex items-center transition-all duration-300 ${isScrolled ? 'shadow-sm bg-whiteBg' : 'bg-[#f3f3f3]'}`}
+         className={`fixed w-full py-3  z-50 flex items-center transition-all duration-300 ${isScrolled ? 'shadow-sm bg-whiteBg' : 'bg-whiteBg'}`}
          initial={{ y: -100 }}
          animate={{ y: 0 }}
          transition={{ duration: 0.5 }}
@@ -121,7 +121,7 @@ const Header = () => {
                            <NavigationMenuContent>
                               <ul className="grid w-[600px] max-w-3xl lg:grid-cols-2 gap-3 p-4 bg-whiteBg shadow-md rounded-md">
                                  {item.subItems.map((subItem) => (
-                                    <Card key={subItem.name} className="flex border-opacity-30 border-slate-300 border shadow-none items-center gap-3 px-4 py-3">
+                                    <Card key={subItem.name} className="flex rounded-sm bg-slate-50 border-opacity-30 border-slate-300 border shadow-none items-center gap-3 px-4 py-3">
                                        {subItem?.img ? <img src={subItem?.img} className='w-10 h-10 object-cover' alt="" /> : <div className='h-10 w-10 bg-slate-200'></div>}
                                        <NavigationMenuLink asChild>
                                           <NavLink

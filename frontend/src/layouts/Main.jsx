@@ -10,7 +10,7 @@ const Main = () => {
          <Outlet />
          <ScrollRestoration />
          <Toaster
-            position="top-right"
+            position="bottom-right"
             richColors={true}
             duration={2000}
          />
