@@ -69,6 +69,7 @@ const AddOrEditProduct = ({ isOpen, setOpen, selectedProduct, refetch }) => {
          if (selectedProduct) {
             await editProduct({ id: selectedProduct?._id, formData });
             handleClose();
+
             toast.success("Product Updated Successfully.");
          } else {
             await addProduct(formData);
@@ -83,16 +84,15 @@ const AddOrEditProduct = ({ isOpen, setOpen, selectedProduct, refetch }) => {
 
    const handleClose = () => {
       setOpen(false);
-      reset({});
+      reset();
       setFiles([]);
       setImagePreview([]);
-      setSelectedSizes([]);
-      setSelectedColors([]);
+
    };
 
    const handleFileChange = (e) => {
       const selectedFiles = Array.from(e.target.files);
-      setFiles(prevFiles => [...prevFiles, ...selectedFiles]);
+      setFiles(prevFiles => [...(prevFiles || []), ...selectedFiles]);
       selectedFiles.forEach(file => {
          const reader = new FileReader();
          reader.onloadend = () => {
@@ -115,7 +115,8 @@ const AddOrEditProduct = ({ isOpen, setOpen, selectedProduct, refetch }) => {
       e.preventDefault();
       setDragging(false);
       const droppedFiles = Array.from(e.dataTransfer.files);
-      setFiles(prevFiles => [...prevFiles, ...droppedFiles]);
+      setFiles(prevFiles => [...(prevFiles || []), ...droppedFiles]);
+
       droppedFiles.forEach(file => {
          const reader = new FileReader();
          reader.onloadend = () => {
@@ -168,7 +169,7 @@ const AddOrEditProduct = ({ isOpen, setOpen, selectedProduct, refetch }) => {
                   {errors.brand && <p className="text-red-500 text-sm">{errors.brand.message}</p>}
                </div>
             </div>
-            <div className="grid grid-cols-2 border p-6 border-primary rounded-sm border-opacity-50 gap-4">
+            <div className="grid lg:grid-cols-2 border p-6 border-primary rounded-sm border-opacity-50 gap-8 lg:gap-4">
                <div className="space-y-2">
                   <Label>Sizes</Label>
                   <div className="flex flex-wrap gap-4">
@@ -195,7 +196,7 @@ const AddOrEditProduct = ({ isOpen, setOpen, selectedProduct, refetch }) => {
                      ))}
                   </div>
                </div>
-               <div className="space-y-2">
+               <div className="space-y-2 ">
                   <Label>Colors</Label>
                   <div className="flex flex-wrap gap-4">
                      {colorOptions.map((color) => (

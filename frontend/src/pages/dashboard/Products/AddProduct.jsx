@@ -167,7 +167,7 @@ const AddProduct = () => {
                      </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 bg-secondary rounded-lg">
+                  <div className="grid lg:grid-cols-2 border p-6 border-primary rounded-sm border-opacity-50 gap-8 lg:gap-4">
                      <div className="space-y-4">
                         <Label className="flex items-center gap-2">
                            <Tag size={18} />

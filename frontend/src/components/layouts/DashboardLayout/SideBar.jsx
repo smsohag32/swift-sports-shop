@@ -20,7 +20,7 @@ export default function Sidebar({ toggle, setToggle }) {
 
 
    const SidebarContent = () => (
-      <div className="flex  scroll-smooth flex-col h-full bg-white dark:bg-gray-800">
+      <div className="flex  scroll-smooth flex-col h-full bg-white dar">
          <div className="flex items-center justify-between py-4 ps-4">
             <Logo className="w-32" />
             <Button

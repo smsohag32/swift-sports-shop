@@ -55,7 +55,7 @@ export default {
             des: "#4D4D4D",
             whiteBg: "#FFFFFF",
             grayWhite: "#727272",
-            primaryOrange: "#FF7F00",
+            primaryOrange: "#FF4500",
             darkOrange: "#CC6600",
             lightOrange: "#FFB366",
             complementaryBlue: "#007FFF",

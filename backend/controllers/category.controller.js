@@ -61,32 +61,42 @@ export const getCategoryById = async (req, res) => {
 export const updateCategory = async (req, res) => {
    try {
       const { id } = req.params;
-
       const { name, description } = JSON.parse(req.body.content);
 
+      // Validate ObjectId
       if (!mongoose.Types.ObjectId.isValid(id)) {
          return res.status(400).json({ message: "Invalid category ID." });
       }
 
+      // Check if category exists
       const category = await Category.findById(id);
       if (!category) {
          return res.status(404).json({ message: "Category not found." });
       }
 
-      let image = category?.image;
+      let image = category.image;
 
+      // Handle image upload
       if (req.file) {
-         // Delete old image if exists
-         if (image) {
-            await deleteImageFromCloud([image]);
+         try {
+            // Delete old image if it exists
+            if (image) {
+               await deleteImageFromCloud([image]);
+            }
+
+            // Upload new image
+            const uploadedImages = await uploadImageToCloud([req.file]);
+            image = uploadedImages[0];
+         } catch (uploadError) {
+            return res
+               .status(500)
+               .json({ message: "Image upload failed.", error: uploadError.message });
          }
-         // Upload new image
-         const uploadedImages = await uploadImageToCloud([req.file]);
-         image = uploadedImages[0]; // Use the first uploaded image URL
       }
 
+      // Update category details
       const updatedCategory = await Category.findByIdAndUpdate(
-         id,
+      id,
          {
             name,
             description,
@@ -96,13 +106,15 @@ export const updateCategory = async (req, res) => {
          { new: true, runValidators: true }
       );
 
+      // If update fails
       if (!updatedCategory) {
          return res.status(404).json({ message: "Failed to update category." });
       }
 
+      // Respond with updated category
       res.status(200).json({ category: updatedCategory });
    } catch (error) {
-      res.status(500).json({ message: error.message });
+      res.status(500).json({ message: "Server error occurred.", error: error.message });
    }
 };
 

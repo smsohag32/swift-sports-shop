@@ -4,7 +4,6 @@ import {
    LogOut,
    Settings,
    User,
-   Users,
 
 } from "lucide-react"
 
@@ -66,7 +65,7 @@ export function ProfileMenu() {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-               <DropdownMenuItem className="cursor-pointer" onClick={() => navigate("/admin/profile")}>
+               <DropdownMenuItem className="cursor-pointer" onClick={() => navigate("/dashboard")}>
                   <User className="mr-2 h-4 w-4" />
                   <span>Profile</span>
                </DropdownMenuItem>
@@ -81,10 +80,6 @@ export function ProfileMenu() {
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-               <DropdownMenuItem className="cursor-pointer" onClick={() => navigate("/admin/team")}>
-                  <Users className="mr-2 h-4 w-4" />
-                  <span>Team</span>
-               </DropdownMenuItem>
                <DropdownMenuItem className="cursor-pointer" onClick={() => navigate("/admin/help")}>
                   <HelpCircle className="mr-2 h-4 w-4" />
                   <span>Help</span>
