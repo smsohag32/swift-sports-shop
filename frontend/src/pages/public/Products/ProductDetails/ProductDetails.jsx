@@ -2,9 +2,11 @@ import UnderDevelopment from "@/components/empty/UnderDevelopment";
 
 const ProductDetails = () => {
    return (
-      <div>
-         <UnderDevelopment message={"Under development..."} />
-      </div>
+      <>
+         <div>
+            <UnderDevelopment message={"Under development..."} />
+         </div>
+      </>
    );
 };
 

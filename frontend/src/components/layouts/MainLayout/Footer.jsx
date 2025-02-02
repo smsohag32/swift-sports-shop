@@ -41,7 +41,7 @@ const Footer = () => {
                         placeholder="Enter your email"
                         className="bg-gray-800 text-whiteBg border-gray-700 focus:border-blue-500"
                      />
-                     <Button type="button" onClick={() => toast.success("Subscribe successfully.")} type="submit" className="bg-blue-600 hover:bg-blue-700 text-whiteBg">
+                     <Button type="button" onClick={() => toast.success("Subscribe successfully.")} type="button" className="bg-blue-600 hover:bg-blue-700 text-whiteBg">
                         Subscribe
                      </Button>
                   </div>

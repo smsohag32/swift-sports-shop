@@ -5,11 +5,12 @@ import { Badge } from "../ui/badge";
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'sonner';
 import { addToCart } from '@/redux-store/slice/cartSlice';
+import { useNavigate } from 'react-router-dom';
 
 const ProductCard = ({ product }) => {
    const dispatch = useDispatch();
    const cartItems = useSelector((state) => state.cart.cartItems);
-
+   const navigate = useNavigate()
    const isInCart = cartItems.some((item) => item._id === product._id);
 
    const handleAddToCart = async () => {
@@ -45,7 +46,7 @@ const ProductCard = ({ product }) => {
                )}
             </div>
             <div className="absolute top-2 right-2 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-               <Button size="icon" variant="secondary">
+               <Button onClick={() => navigate(`/products/details/${product?._id}`)} size="icon" variant="secondary">
                   <Eye className="h-4 w-4" />
                </Button>
                <Button size="icon" variant="secondary">
