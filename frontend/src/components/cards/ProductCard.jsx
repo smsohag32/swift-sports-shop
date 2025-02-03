@@ -5,7 +5,7 @@ import { Badge } from "../ui/badge";
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'sonner';
 import { addToCart } from '@/redux-store/slice/cartSlice';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const ProductCard = ({ product }) => {
    const dispatch = useDispatch();
@@ -55,7 +55,7 @@ const ProductCard = ({ product }) => {
             </div>
          </div>
          <CardContent className="p-4">
-            <h3 className="text-lg font-semibold text-gray-800 mb-2 truncate">{product.name}</h3>
+            <Link to={`/products/details/${product?._id}`} className="text-lg font-semibold text-gray-800  mb-2 truncate">{product.name}</Link>
             <p className="text-sm text-gray-500 mb-2 truncate">{product.brand}</p>
             <div className="flex justify-between items-center">
                <span className="text-xl font-bold text-primary">${product.price.toFixed(2)}</span>

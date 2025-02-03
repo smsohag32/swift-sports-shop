@@ -12,7 +12,7 @@ const Hero = () => {
       <div className=" min-h-[480px]  flex items-center bg-gradient-to-b from-[#fffff] to-transparent  overflow-hidden">
 
          <div className='flex   relative items-center lg:py-10 py-16 flex-col lg:flex-row lg:gap-0 gap-8 w-full main-container'>
-            <AnimatedIcon Icon={Basketball} className="bottom-2/4 hidden lg:block right-1/3" />
+            {/* <AnimatedIcon Icon={Basketball} className="bottom-2/4 hidden lg:block right-1/3" /> */}
             <motion.div
                initial={{ opacity: 0, x: -50 }}
                animate={{ opacity: 1, x: 0 }}
@@ -39,22 +39,22 @@ const Hero = () => {
                </div>
             </motion.div>
             <div className=" flex items-center    w-full pt-16 lg:pt-0 lg:justify-center relative">
-               <div className='w-4/5'>
+               <div className='lg:w-full w-4/5'>
                   <motion.img initial={{ opacity: 1, scale: 0.8, rotateY: 0 }}
-                     animate={{
-                        opacity: 1,
-                        scale: 1,
-                        x: [0, 50, 0],
-                        y: [0, -50, 0],
-                        rotateY: 20,
-                     }}
-                     transition={{
-                        duration: 6,
-                        repeat: Infinity,
-                        repeatType: "reverse",
-                     }}
+                     // animate={{
+                     //    opacity: 1,
+                     //    scale: 1,
+                     //    x: [0, 50, 0],
+                     //    y: [0, -50, 0],
+                     //    rotateY: 20,
+                     // }}
+                     // transition={{
+                     //    duration: 6,
+                     //    repeat: Infinity,
+                     //    repeatType: "reverse",
+                     // }}
                      style={{
-                        transformStyle: 'preserve-3d',
+                        // transformStyle: 'preserve-3d',
                      }} src={heroSports} alt="Swift sports shop" />
                </div>
             </div>
