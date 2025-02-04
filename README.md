@@ -54,3 +54,7 @@
 
 -  **JWT Authentication**: Secure login and authorization for users and admins.
 -  **Admin Authorization**: Admin routes are protected and require a valid token with an admin role.
+
+### **Docker**
+
+-  **run and build**: Docker compose up --build -d

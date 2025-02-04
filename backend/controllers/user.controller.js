@@ -70,6 +70,7 @@ export const signIn = async (req, res) => {
       }
 
       // Generate JWT token
+      console.log(process.env.ACCESS_TOKEN);
       const token = jwt.sign({ id: user._id }, process.env.ACCESS_TOKEN, {
          expiresIn: "1h",
       });

@@ -6,8 +6,8 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import VmModal from "@/components/modals/VmModal";
 import { toast } from "sonner";
-import { useAddProductMutation, useEditProductMutation } from "@/redux-store/api/productApi";
-import { useGetAllCategoryQuery } from "@/redux-store/api/categoryApi";
+import { useAddProductMutation, useEditProductMutation } from "@/redux-store/services/productApi";
+import { useGetAllCategoryQuery } from "@/redux-store/services/categoryApi";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox"
 

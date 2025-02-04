@@ -7,7 +7,7 @@ import VmAlert from "@/components/modals/VmAlert";
 import Loading from "@/components/loading/Loading";
 import { toast } from "sonner";
 import { useState } from "react";
-import { useDeleteProductMutation, useGetAllProductQuery } from "@/redux-store/api/productApi";
+import { useDeleteProductMutation, useGetAllProductQuery } from "@/redux-store/services/productApi";
 import { UserAvatar } from "@/components/user-avatar/UserAvatar";
 
 const ManageProducts = () => {

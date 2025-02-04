@@ -7,8 +7,8 @@ import { useNavigate } from "react-router-dom"
 const About = () => {
    const navigate = useNavigate()
    return (
-      <div className="bg-gradient-to-b bg-[#f3f3f3] min-h-screen">
-         <div className="main-container py-16">
+      <div className="bg-gradient-to-b bg-[#ffffff] min-h-screen">
+         <div className="main-container pb-16 pt-10">
             <section className="text-center mb-16">
                <h2 className="text-4xl font-semibold text-title mb-4">Our Story</h2>
                <p className="text-xl text-gray-600 max-w-3xl mx-auto">

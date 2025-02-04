@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import VmModal from "@/components/modals/VmModal";
 import { toast } from "sonner";
-import { useAddCategoryMutation, useEditCategoryMutation } from "@/redux-store/api/categoryApi";
+import { useAddCategoryMutation, useEditCategoryMutation } from "@/redux-store/services/categoryApi";
 
 const AddOrEditCategory = ({ isOpen, setOpen, selectedCategory, refetch }) => {
    const [addCategory, { isLoading: addLoading }] = useAddCategoryMutation()
@@ -37,7 +37,7 @@ const AddOrEditCategory = ({ isOpen, setOpen, selectedCategory, refetch }) => {
          formData.append("content", JSON.stringify(data))
          if (file) {
             formData.append("image", file)
-      }
+         }
          if (selectedCategory) {
             await editCategory({ id: selectedCategory?._id, formData })
             handleClose()

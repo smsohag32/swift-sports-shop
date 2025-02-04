@@ -1,6 +1,6 @@
 import Empty from '@/components/empty/Empty';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { useGetAllCategoryQuery } from '@/redux-store/api/categoryApi';
+import { useGetAllCategoryQuery } from '@/redux-store/services/categoryApi';
 import {
    Carousel,
    CarouselContent,

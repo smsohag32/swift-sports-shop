@@ -1,6 +1,6 @@
 
 import ProductCard from "@/components/cards/ProductCard";
-import { useGetAllProductQuery } from "@/redux-store/api/productApi";
+import { useGetAllProductQuery } from "@/redux-store/services/productApi";
 import ProductCardSkeleton from "@/components/skeleton/ProductSkeleton";
 
 const ProductSection = () => {

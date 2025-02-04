@@ -53,7 +53,7 @@ export default function TopBar({ toggle, setToggle }) {
 
    return (
       <div
-         className='flex w-full relative px-4   transition-all duration-300 items-center top-0 justify-between  border-b bg-white border-b-[#dededed2] z-50 py-3'
+         className='flex w-full relative px-4   transition-all duration-300 items-center top-0 justify-between  border-b bg-[#f3f3f3] border-b-[#dededed2] z-50 py-3'
          style={{
             height: '70px',
 
@@ -74,7 +74,7 @@ export default function TopBar({ toggle, setToggle }) {
             <input
                type="text"
                placeholder="Search"
-               className="lg:py-[10px] py-2 border border-slate-200 shadow-sm ps-[50px] bg-transparent transition-all duration-300 focus:!bg-[#f6f6f6] !bg-opacity-10 backdrop-blur-lg pe-5  w-full outline-none  rounded-[4px]"
+               className="lg:py-[10px] py-2 border border-slate-200 !bg-white shadow-sm ps-[50px]  transition-all duration-300 focus:!bg-[#fcfcfc]  backdrop-blur-lg pe-5  w-full outline-none  rounded-[4px]"
             />
             <span className="absolute left-4 transform -translate-y-1/2 top-1/2 ">
                <svg

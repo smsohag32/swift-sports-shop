@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+   swift-sports-shop-frontend:
+      container_name: swift-sports-shop-frontend
+      build:
+         context: ./frontend
+         dockerfile: Dockerfile
+         args:
+            - VITE_BASE_URL=http://swift-sports-shop-backend:3100/api/v1
+      ports:
+         - "5173:80"
+      depends_on:
+         - swift-sports-shop-backend
+
+   swift-sports-shop-backend:
+      container_name: swift-sports-shop-backend
+      build:
+         context: ./backend
+         dockerfile: Dockerfile
+      ports:
+         - "5000:3100" # External 5000 mapped to internal 3100
+      environment:
+         - NODE_ENV=production
+         - DB_PASSWORD=smsohag32

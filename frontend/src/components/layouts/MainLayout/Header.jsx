@@ -25,7 +25,7 @@ import { UserProfileMenu } from './UserProfileMenu'
 import HeaderCarts from '@/pages/public/Carts/HeaderCarts'
 import { logoutUser } from '@/redux-store/slice/authSlice'
 import { useDispatch } from 'react-redux'
-import { useGetAllCategoryQuery } from '@/redux-store/api/categoryApi'
+import { useGetAllCategoryQuery } from '@/redux-store/services/categoryApi'
 
 const Header = () => {
    const { data: categoriesData } = useGetAllCategoryQuery();
@@ -72,7 +72,7 @@ const Header = () => {
 
    return (
       <motion.header
-         className={`fixed w-full py-3  z-50 flex items-center transition-all duration-300 ${isScrolled ? 'shadow-sm bg-whiteBg' : 'bg-whiteBg'}`}
+         className={`fixed w-full py-3  z-50 flex items-center transition-all duration-300 ${isScrolled ? 'shadow-sm bg-slate-50' : 'bg-slate-50'}`}
          initial={{ y: -100 }}
          animate={{ y: 0 }}
          transition={{ duration: 0.5 }}

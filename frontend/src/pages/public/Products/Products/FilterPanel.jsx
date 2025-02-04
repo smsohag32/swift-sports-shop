@@ -6,7 +6,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Button } from "@/components/ui/button"
 import { Star, ChevronDown, ChevronUp } from 'lucide-react'
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { useGetAllCategoryQuery } from "@/redux-store/api/categoryApi";
+import { useGetAllCategoryQuery } from "@/redux-store/services/categoryApi";
 
 
 const FilterPanel = () => {

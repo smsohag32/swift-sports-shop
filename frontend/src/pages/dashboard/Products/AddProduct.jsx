@@ -7,8 +7,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
-import { useGetAllCategoryQuery } from '@/redux-store/api/categoryApi';
-import { useAddProductMutation } from '@/redux-store/api/productApi';
+import { useGetAllCategoryQuery } from '@/redux-store/services/categoryApi';
+import { useAddProductMutation } from '@/redux-store/services/productApi';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Loader2, Upload, Tag, Palette, Box, DollarSign, BarChart, FileText, ImageIcon } from 'lucide-react';
 

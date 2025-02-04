@@ -44,10 +44,12 @@ const Login = () => {
             toast.error(`${resultAction?.message}` || "Login Failed");
          }
       } catch (error) {
+         console.log(error)
          if (error.response && error.response.status === 400) {
             toast.error("Login failed: ", error.response.data || "Invalid login credentials");
          } else {
-            toast.error("Login failed due to an unexpected error");
+            console.log(error)
+            toast.error(error?.message || "Login failed due to an unexpected error");
          }
       } finally {
          setIsLoading(false);

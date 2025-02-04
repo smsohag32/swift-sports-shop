@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://swift-sports-shop-server.vercel.app/api/v1";
-// const BASE_URL = "http://localhost:4000/api/v1";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const loginApi = async (credential) => {
    try {

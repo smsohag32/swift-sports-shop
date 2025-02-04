@@ -6,7 +6,7 @@ import { UserAvatar } from "@/components/user-avatar/UserAvatar";
 import { Edit, Tags, Trash2 } from "lucide-react";
 import { useState } from "react";
 import AddOrEditCategory from "./AddOrEditCategory";
-import { useDeleteCategoryMutation, useGetAllCategoryQuery } from "@/redux-store/api/categoryApi";
+import { useDeleteCategoryMutation, useGetAllCategoryQuery } from "@/redux-store/services/categoryApi";
 import VmAlert from "@/components/modals/VmAlert";
 import { toast } from "sonner";
 
