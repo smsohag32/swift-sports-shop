@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import morgan from "morgan";
 const app = express();
 dotenv.config();
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 3100;
 import { connectDb } from "./config/dbConfig.js";
 
 import mainRoute from "./routes/mainRoute.js";
