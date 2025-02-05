@@ -61,7 +61,7 @@ const FilterPanel = () => {
                         <span>${priceRange[1]}</span>
                      </div>
                   </div>
-                  <div className="mb-6">
+                  {/* <div className="mb-6">
                      <h3 className="font-semibold mb-2">Filter by category</h3>
                      <ScrollArea className="h-[200px] ">
                         <div className="grid gap-1">
@@ -79,7 +79,7 @@ const FilterPanel = () => {
                            ))}
                         </div>
                      </ScrollArea>
-                  </div>
+                  </div> */}
                   <div className="mb-6">
                      <h3 className="font-semibold mb-2">Brand</h3>
                      <ScrollArea className="h-[120px]">

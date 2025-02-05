@@ -1,6 +1,6 @@
 
 import ProductCard from "@/components/cards/ProductCard";
-import { useGetAllProductQuery, useSearchProductQuery } from "@/redux-store/services/productApi";
+import { useSearchProductQuery } from "@/redux-store/services/productApi";
 
 import ProductCardSkeleton from "@/components/skeleton/ProductSkeleton";
 import { Link, useSearchParams } from "react-router-dom";
@@ -9,13 +9,15 @@ import FilterPanel from "./FilterPanel";
 import { Input } from "@/components/ui/input";
 import { ChevronRight, ShoppingBag } from "lucide-react";
 import Empty from "@/components/empty/Empty";
+import { useState } from "react";
 
 const Products = () => {
    const [searchParams] = useSearchParams();
    const category = searchParams.get("category");
+   const [searchText, setSearchText] = useState("")
    const categoryId = searchParams.get("id");
-   const { data: productData, refetch, error, isLoading } = useSearchProductQuery({
-      searchText: "",
+   const { data: productData, error, isLoading } = useSearchProductQuery({
+      searchText: searchText,
       isAscending: true,
       itemPerPage: 10,
       page: 1,
@@ -65,6 +67,7 @@ const Products = () => {
                <div className="w-full lg:w-3/4">
                   <div className="mb-4">
                      <Input
+                        onChange={(e) => setSearchText(e.target.value)}
                         type="search"
                         placeholder="Search products..."
                         className="w-full"
