@@ -7,9 +7,9 @@ const HomePage = () => {
    return (
       <div className="relative overflow-hidden" >
          <Hero />
+         <ShopByCategory />
          <ProductSection />
          <WhyChoose />
-         <ShopByCategory />
       </div>
    );
 };

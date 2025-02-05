@@ -3,7 +3,7 @@ import { ChevronRight, Minus, Plus, ShoppingBag, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { useGetProductByIdQuery } from "@/redux-store/services/productApi"
-import { Link, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { Skeleton } from "@/components/ui/skeleton"
 import { formatName } from "@/utils/helper"
 import AddCart from "./AddCart"
@@ -15,7 +15,7 @@ const ProductDetails = () => {
    const [magnifyStyle, setMagnifyStyle] = useState({})
    const imageRef = useRef(null)
    const { data, isLoading } = useGetProductByIdQuery(productId)
-
+   const navigate = useNavigate()
    const product = data?.product
 
    const handleQuantityChange = (action) => {
@@ -177,7 +177,7 @@ const ProductDetails = () => {
                      <AddCart product={product} />
                   </div>
                   <div className="flex items-center gap-4">
-                     <Button variant="" size="lg" className="w-full">
+                     <Button onClick={() => navigate(`/checkout`)} variant="" size="lg" className="w-full">
                         <ShoppingBag />   Order now
                      </Button>
                   </div>

@@ -23,11 +23,12 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { removeFromCart, updateQuantity } from '@/redux-store/slice/cartSlice';
 import { toast } from 'sonner';
 import { useMediaQuery } from "@/hooks/use-media-query";
+import { useNavigate } from "react-router-dom";
 
 const HeaderCarts = () => {
    const [isOpen, setIsOpen] = useState(false);
    const isDesktop = useMediaQuery("(min-width: 768px)");
-
+   const navigate = useNavigate()
    const dispatch = useDispatch();
    const { cartItems, totalQuantity, totalCost } = useSelector((state) => state.cart);
 
@@ -139,7 +140,7 @@ const HeaderCarts = () => {
                      <div className=" w-full px-6 pt-6 pb- max-h-[70vh] overflow-y-auto">
                         {renderCartContent()}
                         <DrawerFooter className="mt-6">
-                           <Button disabled={cartItems.length === 0} className="w-full bg-[#FF4500] hover:bg-[#FF6347]">
+                           <Button onClick={() => navigate(`/checkout`)} disabled={cartItems.length === 0} className="w-full bg-[#FF4500] hover:bg-[#FF6347]">
                               Proceed to Checkout
                            </Button>
                         </DrawerFooter>

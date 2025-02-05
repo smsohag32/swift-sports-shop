@@ -76,29 +76,29 @@ const FeatureItem = ({ icon: Icon, text }) => (
    </motion.div>
 )
 
-const AnimatedIcon = ({ className }) => (
-   <motion.div
-      className={`absolute ${className}`}
-      initial={{ opacity: 0, scale: 0.8, rotateY: 0 }}
-      animate={{
-         opacity: 0.5,
-         scale: 1,
-         x: [0, 10, 0],
-         y: [0, -10, 0],
-         rotateY: 360,
-      }}
-      transition={{
-         duration: 4,
-         repeat: Infinity,
-         repeatType: "reverse",
-      }}
-      style={{
-         transformStyle: 'preserve-3d',
-      }}
-   >
-      <img src={ball} className='w-20' alt="Ball" />
-   </motion.div>
-)
+// const AnimatedIcon = ({ className }) => (
+//    <motion.div
+//       className={`absolute ${className}`}
+//       initial={{ opacity: 0, scale: 0.8, rotateY: 0 }}
+//       animate={{
+//          opacity: 0.5,
+//          scale: 1,
+//          x: [0, 10, 0],
+//          y: [0, -10, 0],
+//          rotateY: 360,
+//       }}
+//       transition={{
+//          duration: 4,
+//          repeat: Infinity,
+//          repeatType: "reverse",
+//       }}
+//       style={{
+//          transformStyle: 'preserve-3d',
+//       }}
+//    >
+//       <img src={ball} className='w-20' alt="Ball" />
+//    </motion.div>
+// )
 
 
 

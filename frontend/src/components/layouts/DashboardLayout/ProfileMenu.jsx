@@ -69,21 +69,18 @@ export function ProfileMenu() {
                   <User className="mr-2 h-4 w-4" />
                   <span>Profile</span>
                </DropdownMenuItem>
-               <DropdownMenuItem className="cursor-pointer" onClick={() => navigate("/admin/settings")}>
-                  <Settings className="mr-2 h-4 w-4" />
-                  <span>Settings</span>
-               </DropdownMenuItem>
-               <DropdownMenuItem onClick={() => navigate("/admin/notifications")}>
-                  <Bell className="mr-2 h-4 w-4" />
-                  <span>Notifications</span>
-               </DropdownMenuItem>
+
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-               <DropdownMenuItem className="cursor-pointer" onClick={() => navigate("/admin/help")}>
+               <DropdownMenuItem
+                  className="cursor-pointer"
+                  onClick={() => window.open("https://sohagsheik.vercel.app", "_blank")}
+               >
                   <HelpCircle className="mr-2 h-4 w-4" />
                   <span>Help</span>
                </DropdownMenuItem>
+
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem className="cursor-pointer" onClick={handleLogout}>

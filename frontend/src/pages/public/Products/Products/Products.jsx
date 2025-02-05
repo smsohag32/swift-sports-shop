@@ -1,6 +1,6 @@
 
 import ProductCard from "@/components/cards/ProductCard";
-import { useGetAllProductQuery } from "@/redux-store/services/productApi";
+import { useGetAllProductQuery, useSearchProductQuery } from "@/redux-store/services/productApi";
 
 import ProductCardSkeleton from "@/components/skeleton/ProductSkeleton";
 import { Link, useSearchParams } from "react-router-dom";
@@ -8,12 +8,19 @@ import { formatName } from "@/utils/helper";
 import FilterPanel from "./FilterPanel";
 import { Input } from "@/components/ui/input";
 import { ChevronRight, ShoppingBag } from "lucide-react";
+import Empty from "@/components/empty/Empty";
 
 const Products = () => {
-   const { data: productData, isLoading } = useGetAllProductQuery();
-
    const [searchParams] = useSearchParams();
    const category = searchParams.get("category");
+   const categoryId = searchParams.get("id");
+   const { data: productData, refetch, error, isLoading } = useSearchProductQuery({
+      searchText: "",
+      isAscending: true,
+      itemPerPage: 10,
+      page: 1,
+      ...(categoryId ? { categoryId } : category ? { category } : {}),
+   });
 
    const filteredProducts = productData?.products
 
@@ -63,18 +70,21 @@ const Products = () => {
                         className="w-full"
                      />
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                     {isLoading
-                        ? skeletonArray.map((_, index) => (
-                           <ProductCardSkeleton key={index} />
-                        ))
-                        : filteredProducts && filteredProducts.length > 0
-                           ? filteredProducts.map((product) => (
-                              <ProductCard product={product} key={product?._id} />
+                  {
+                     filteredProducts && filteredProducts.length > 0 ? <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {isLoading
+                           ? skeletonArray.map((_, index) => (
+                              <ProductCardSkeleton key={index} />
                            ))
-                           : <div className="col-span-full text-center text-gray-500">No products found.</div>
-                     }
-                  </div>
+                           : filteredProducts && filteredProducts.length > 0
+                              ? filteredProducts.map((product) => (
+                                 <ProductCard product={product} key={product?._id} />
+                              ))
+                              : <Empty message={"No products found."}></Empty>
+                        }
+                     </div> : <Empty message={"No products found."}></Empty>
+                  }
+
                </div>
             </div>
 

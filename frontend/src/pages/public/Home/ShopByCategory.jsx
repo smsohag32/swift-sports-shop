@@ -17,9 +17,9 @@ const ShopByCategory = () => {
    return (
       <section className="py-16">
          <div className="main-container">
-            <h2 className="text-2xl lg:text-[36px] text-title font-medium text-center mb-12">
+            {/* <h2 className="text-2xl lg:text-[36px] text-title font-medium text-center mb-12">
                Shop by Category
-            </h2>
+            </h2> */}
 
             {isLoading ? (
                <LoadingSkeleton />
