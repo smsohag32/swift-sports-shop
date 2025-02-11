@@ -6,6 +6,7 @@ import {
    updateProduct,
    deleteProduct,
    changeProductStatus,
+   searchProduct,
 } from "../controllers/product.controller.js";
 
 import { upload } from "../utils/upload.js";
@@ -16,6 +17,7 @@ const router = express.Router();
 router.post("/products/", upload.array("images", 5), createProduct);
 
 router.get("/products/", getProducts);
+router.get("/products/search", searchProduct);
 
 router.get("/products/:id", getProductById);
 

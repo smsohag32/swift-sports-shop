@@ -41,6 +41,53 @@ export const getProducts = async (req, res) => {
    }
 };
 
+export const searchProduct = async (req, res) => {
+   try {
+      let { categoryId, searchText, isAscending, brand, sortBy } = req.query;
+      let { itemPerPage = 10, page = 1 } = req.query;
+
+      itemPerPage = Math.max(1, parseInt(itemPerPage));
+      page = Math.max(1, parseInt(page));
+
+      let filter = { status: "active" };
+
+      // Validate and apply category filter
+      if (categoryId) {
+         if (!mongoose.Types.ObjectId.isValid(categoryId)) {
+            return res.status(400).json({ message: "Invalid category ID format." });
+         }
+         filter.category = new mongoose.Types.ObjectId(categoryId);
+      }
+
+      if (brand) filter.brand = brand;
+      if (searchText) filter.name = { $regex: searchText, $options: "i" };
+
+      const totalProducts = await Product.countDocuments(filter);
+      const sortOrder = isAscending === "true" ? 1 : -1;
+      const sortField = ["price", "name", "createdAt"].includes(sortBy) ? sortBy : "createdAt";
+
+      const products = await Product.find(filter)
+         .populate("category")
+         .sort({ [sortField]: sortOrder })
+         .skip((page - 1) * itemPerPage)
+         .limit(itemPerPage)
+         .lean();
+
+      const formattedProducts = products.map((product) => {
+         const totalRatings = product.reviews?.length || 0;
+         const avgRating =
+            totalRatings > 0
+               ? product.reviews.reduce((sum, review) => sum + review.rating, 0) / totalRatings
+               : 0;
+         return { ...product, avgRating: avgRating.toFixed(1) };
+      });
+
+      res.status(200).json({ totalProducts, products: formattedProducts });
+   } catch (error) {
+      res.status(500).json({ message: error.message });
+   }
+};
+
 // Get a single product by ID
 export const getProductById = async (req, res) => {
    try {
