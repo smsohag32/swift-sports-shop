@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { Button } from "@/components/ui/button"
 import { ShoppingCart, TrendingUp, Award, Zap } from 'lucide-react'
 import heroSports from "@/assets/sports/hero.webp"
+import wave from "@/assets/sports/wave.webp"
 
 import { useNavigate } from 'react-router-dom'
 const Hero = () => {
@@ -59,7 +60,9 @@ const Hero = () => {
                </div>
             </div>
          </div>
-
+         <div className=' absolute w-1/5 top-0 right-0 opacity-10'>
+            <img src={wave} alt="Sports Shop" className='' />
+         </div>
       </div>
    )
 }
