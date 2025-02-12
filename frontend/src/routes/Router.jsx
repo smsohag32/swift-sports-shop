@@ -16,6 +16,7 @@ import { Checkout } from "@/pages/public/Home/Order/Checkout/Checkout";
 import ProductDetails from "@/pages/public/Products/ProductDetails/ProductDetails";
 import Products from "@/pages/public/Products/Products/Products";
 import { createBrowserRouter } from "react-router-dom";
+import SecureRoute from "./SecureRoute";
 
 export const router = createBrowserRouter([
    {
@@ -36,7 +37,9 @@ export const router = createBrowserRouter([
          },
          {
             path: "/checkout",
-            element: <Checkout />,
+            element: <SecureRoute userTypes={["admin", "user"]}>
+               <Checkout />
+            </SecureRoute>,
          },
          {
             path: "/products/details/:productId",
@@ -62,7 +65,7 @@ export const router = createBrowserRouter([
    },
    {
       path: "/dashboard",
-      element: <Dashboard />,
+      element: <SecureRoute userTypes={["admin"]}><Dashboard /></SecureRoute>,
       children: [
          {
             path: "/dashboard",

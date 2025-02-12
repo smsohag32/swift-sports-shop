@@ -7,23 +7,30 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { toast } from 'sonner'
 import Logo from '@/assets/svg/Logo'
+import { useRegisterUserMutation } from '@/redux-store/services/userApi'
 
 const RegistrationPage = () => {
    const { register, handleSubmit, formState: { errors, isValid }, watch } = useForm({
       mode: 'onChange'
    })
-   const [isLoading, setIsLoading] = React.useState(false)
+   const [registerUser, { isLoading }] = useRegisterUserMutation()
 
    const onSubmit = async (data) => {
-      setIsLoading(true)
-      try {
 
+      try {
+         const newUser = {
+            name: data.name,
+            email: data.email,
+            phone: data.phone,
+            address: data.address,
+            password: data.password,
+            role: "user"
+         }
+         const res = await registerUser(newUser).unwrap()
          toast.success("Registration successful!")
 
       } catch (error) {
          toast.error("Registration failed: " + error.message)
-      } finally {
-         setIsLoading(false)
       }
    }
 
@@ -78,12 +85,17 @@ const RegistrationPage = () => {
                            type="tel"
                            placeholder="Phone Number"
                            className="pl-10"
+                           maxLength={20}
                            {...register("phone", {
                               required: "Phone number is required",
                               pattern: {
-                                 value: /^[0-9]{10}$/,
-                                 message: "Invalid phone number"
-                              }
+                                 value: /^(\+?[\d\s\-()]{7,})$/,
+                                 message: "Please enter a valid phone number",
+                              },
+                              validate: (value) => {
+                                 const digitsOnly = value.replace(/\D/g, "")
+                                 return (digitsOnly.length >= 7 && digitsOnly.length <= 15) || "Phone number must be between 7 and 15 digits"
+                              },
                            })}
                         />
                      </div>

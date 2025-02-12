@@ -8,7 +8,15 @@ const userApi = apiSlice.injectEndpoints({
          }),
          providesTags: ["user"],
       }),
+      registerUser: builder.mutation({
+         query: (newUser) => ({
+            url: `/auth/register`,
+            method: "POST",
+            body: newUser,
+         }),
+         providesTags: ["user"],
+      }),
    }),
 });
 
-export const { useGetUserQuery } = userApi;
+export const { useGetUserQuery, useRegisterUserMutation } = userApi;
