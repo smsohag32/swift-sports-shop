@@ -2,14 +2,14 @@
 
 import { motion } from 'framer-motion'
 import { Button } from "@/components/ui/button"
-import { ShoppingCart, TrendingUp, Award, Zap, ShoppingBasketIcon as Basketball } from 'lucide-react'
+import { ShoppingCart, TrendingUp, Award, Zap } from 'lucide-react'
 import heroSports from "@/assets/sports/hero.webp"
-import ball from "@/assets/sports/ball.png"
+
 import { useNavigate } from 'react-router-dom'
 const Hero = () => {
    const navigate = useNavigate()
    return (
-      <div className=" min-h-[480px]  flex items-center bg-gradient-to-b from-[#fffff] to-transparent  overflow-hidden">
+      <div className=" min-h-[480px] relative  flex items-center bg-gradient-to-b from-[#fffff] to-transparent  overflow-hidden">
 
          <div className='flex   relative items-center lg:py-10 py-16 flex-col lg:flex-row lg:gap-0 gap-8 w-full main-container'>
             {/* <AnimatedIcon Icon={Basketball} className="bottom-2/4 hidden lg:block right-1/3" /> */}

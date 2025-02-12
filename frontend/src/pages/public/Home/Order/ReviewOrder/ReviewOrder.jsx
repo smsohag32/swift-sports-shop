@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button"
+import ReviewCarts from "@/pages/public/Carts/ReviewCarts"
 import { ShoppingCart } from "lucide-react"
 
 
@@ -34,37 +35,8 @@ export const ReviewOrder = ({ formData, onSubmit }) => {
          </div>
          <div>
             <h3 className="text-lg font-semibold mb-4">Order Summary</h3>
-            <div className="space-y-4">
-               {order.items.map((item) => (
-                  <div key={item.id} className="flex items-center space-x-4">
-                     <img
-                        src={item.image || "/placeholder.svg"}
-                        alt={item.name}
-                        width={64}
-                        height={64}
-                        className="rounded-md"
-                     />
-                     <div className="flex-1">
-                        <h4 className="font-medium">{item.name}</h4>
-                        <p className="text-sm text-muted-foreground">Quantity: {item.quantity}</p>
-                     </div>
-                     <p className="font-medium">${(item.price * item.quantity).toFixed(2)}</p>
-                  </div>
-               ))}
-            </div>
-            <div className="border-t mt-4 pt-4 space-y-2">
-               <div className="flex justify-between">
-                  <span>Subtotal</span>
-                  <span>${subtotal.toFixed(2)}</span>
-               </div>
-               <div className="flex justify-between">
-                  <span>Shipping</span>
-                  <span>${shipping.toFixed(2)}</span>
-               </div>
-               <div className="flex justify-between font-semibold text-lg">
-                  <span>Total</span>
-                  <span>${total.toFixed(2)}</span>
-               </div>
+            <div>
+               <ReviewCarts />
             </div>
          </div>
          <Button onClick={handleSubmit} className="w-full">
