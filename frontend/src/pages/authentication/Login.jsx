@@ -1,8 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from "react-hook-form"
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Mail, Lock, ArrowRight } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -12,10 +12,13 @@ import Logo from "@/assets/svg/Logo"
 import { toast } from 'sonner'
 import { loginUser } from '@/redux-store/slice/authSlice'
 import { useDispatch } from 'react-redux'
+import { Separator } from '@/components/ui/separator'
 
 const Login = () => {
    const dispatch = useDispatch()
    const navigate = useNavigate()
+   const location = useLocation()
+   const from = location?.state?.from?.pathName || "/"
    const { register, handleSubmit, formState: { isValid } } = useForm({
       mode: 'onChange'
    })
@@ -34,7 +37,7 @@ const Login = () => {
 
             } else if (resultAction?.user?.role === "user") {
                toast.success("Login successful");
-               navigate("/");
+               navigate(from, { replace: true });
             } else {
                toast.success("Unknown User");
                navigate("/");
@@ -55,21 +58,67 @@ const Login = () => {
          setIsLoading(false);
       }
    };
+   useEffect(() => {
+      console.log("useEffect running...");
+
+      // Show cookie policy notification
+      const cookieToast = toast.info(
+         <div>
+            <p>
+               We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.
+            </p>
+            <Button variant="outline" size="sm" onClick={() => toast.dismiss(cookieToast)} className="mt-2">
+               Got it
+            </Button>
+         </div>,
+         {
+            duration: Number.POSITIVE_INFINITY,
+            position: "bottom-right",
+         },
+      );
+
+      // Show default credentials notification
+      toast.info(
+         <div>
+            <p className='text-2xl font-normal mb-2'>Default credentials:</p>
+            <div className='p-4'>
+               <p>Admin</p>
+               <p className='text-base text-gray-800'>Email: sohagsheik32@gmail.com</p>
+               <p className='text-base text-gray-800'>Password: 11223344</p>
+               <Separator className="my-4" />
+               <p>User</p>
+               <p className='text-base text-gray-800'>Email: sohag@gmail.com</p>
+               <p className='text-base text-gray-800'>Password: 11223344</p>
+               <Separator className="my-4" />
+            </div>
+         </div>,
+         {
+            duration: 10000,
+            position: "bottom-right",
+            icon: <Mail />,
+            closeButton: true,
+         },
+      );
+   }, []);
+
+
 
    return (
       <div className="min-h-screen  flex items-center justify-center main-container">
 
          <Card className="w-full max-w-md">
             <CardHeader className="space-y-1">
-               <div className="flex justify-center mb-4">
-                  <Logo className="w-auto h-12" />
+               <div className='flex items-center justify-center -mt-24'>
+                  <div className="flex justify-center bg-blue-50 border  shadow-sm rounded-full p-6 w-32  items-center h-32  mb-4">
+                     <Logo className=" " width='100' />
+                  </div>
                </div>
-               <CardTitle className="text-2xl font-bold text-center">Sign in to Swift Sports</CardTitle>
+               <CardTitle className="text-2xl font-medium text-center text-title ">Sign in to Swift Sports</CardTitle>
                <CardDescription className="text-center">
                   Enter your email and password to access your account
                </CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="mt-6">
                <form onSubmit={handleSubmit(handleLogin)} className="space-y-4">
                   <div className="space-y-2">
                      <div className="relative">
@@ -97,7 +146,7 @@ const Login = () => {
                         />
                      </div>
                   </div>
-                  <div className="flex items-center justify-between">
+                  {/* <div className="flex items-center justify-between">
                      <div className="flex items-center space-x-2">
                         <Checkbox id="remember" />
                         <label
@@ -110,27 +159,29 @@ const Login = () => {
                      <Link href="/forgot-password" className="text-sm text-blue-600 hover:underline">
                         Forgot password?
                      </Link>
+                  </div> */}
+                  <div className='pt-4'>
+                     <Button
+                        type="submit"
+                        className="w-full"
+                        disabled={!isValid || isLoading}
+                     >
+                        {isLoading ? (
+                           <>
+                              <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                              </svg>
+                              Signing in...
+                           </>
+                        ) : (
+                           <>
+                              Sign in
+                              <ArrowRight className="ml-2 h-4 w-4" />
+                           </>
+                        )}
+                     </Button>
                   </div>
-                  <Button
-                     type="submit"
-                     className="w-full"
-                     disabled={!isValid || isLoading}
-                  >
-                     {isLoading ? (
-                        <>
-                           <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                           </svg>
-                           Signing in...
-                        </>
-                     ) : (
-                        <>
-                           Sign in
-                           <ArrowRight className="ml-2 h-4 w-4" />
-                        </>
-                     )}
-                  </Button>
                </form>
             </CardContent>
             <CardFooter className="flex items-center mb-3 justify-center">

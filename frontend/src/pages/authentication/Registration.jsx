@@ -35,11 +35,15 @@ const RegistrationPage = () => {
    }
 
    return (
-      <div className="min-h-screen bg-[f3f3f3] flex items-center justify-center p-4">
-         <Card className="w-full max-w-md">
+      <div className="min-h-screen bg-[f3f3f3] py-24 flex items-center justify-center p-4">
+         <Card className="w-full max-w-xl">
             <CardHeader className="space-y-1">
-               <div className='flex items-center justify-center '> <Logo className='32' /></div>
-               <CardTitle className="text-2xl font-bold text-center">Create an Account</CardTitle>
+               <div className='flex items-center justify-center -mt-24'>
+                  <div className="flex justify-center bg-blue-50 border  shadow-sm rounded-full p-6 w-32  items-center h-32  mb-4">
+                     <Logo className=" " width='100' />
+                  </div>
+               </div>
+               <CardTitle className="text-2xl font-medium text-title text-center">Create an Account</CardTitle>
                <CardDescription className="text-center">
                   Enter your details below to create your account and get started
                </CardDescription>

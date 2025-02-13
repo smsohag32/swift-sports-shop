@@ -60,9 +60,9 @@ const Hero = () => {
                </div>
             </div>
          </div>
-         <div className=' absolute w-1/5 top-0 right-0 opacity-10'>
+         {/* <div className=' absolute w-1/5 top-0 right-0 opacity-10'>
             <img src={wave} alt="Sports Shop" className='' />
-         </div>
+         </div> */}
       </div>
    )
 }

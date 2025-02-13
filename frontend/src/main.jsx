@@ -15,7 +15,7 @@ createRoot(document.getElementById('root')).render(
 
          </RouterProvider>
          <Toaster
-            position="top-right"
+            position="top-center"
             richColors={true}
             duration={2000}
          />

@@ -42,6 +42,12 @@ const HeaderCarts = () => {
       }
    };
 
+   // handle checkout
+   const handleCheckout = () => {
+      navigate("/checkout");
+      setIsOpen(false);
+   }
+
    const handleRemoveItem = (id) => {
       dispatch(removeFromCart(id));
       toast.success("Item removed from cart");
@@ -121,7 +127,7 @@ const HeaderCarts = () => {
                   </SheetHeader>
                   {renderCartContent()}
                   <SheetFooter className="mt-6">
-                     <Button disabled={cartItems.length === 0} className="w-full bg-[#FF4500] hover:bg-[#FF6347]">
+                     <Button disabled={cartItems.length === 0} onClick={handleCheckout} className="w-full bg-[#FF4500] hover:bg-[#FF6347]">
                         Proceed to Checkout
                      </Button>
                   </SheetFooter>
@@ -140,7 +146,7 @@ const HeaderCarts = () => {
                      <div className=" w-full px-6 pt-6 pb- max-h-[70vh] overflow-y-auto">
                         {renderCartContent()}
                         <DrawerFooter className="mt-6">
-                           <Button onClick={() => navigate(`/checkout`)} disabled={cartItems.length === 0} className="w-full bg-[#FF4500] hover:bg-[#FF6347]">
+                           <Button onClick={handleCheckout} disabled={cartItems.length === 0} className="w-full bg-[#FF4500] hover:bg-[#FF6347]">
                               Proceed to Checkout
                            </Button>
                         </DrawerFooter>
