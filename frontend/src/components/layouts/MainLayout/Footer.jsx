@@ -5,8 +5,14 @@ import { Facebook, Twitter, Instagram, YoutubeIcon as YouTube } from 'lucide-rea
 import { Link } from "react-router-dom"
 import logo from "@/assets/sports/image2.png"
 import { toast } from "sonner"
+import { useState } from "react"
 
 const Footer = () => {
+   const [email, setEmail] = useState("")
+   const handleSubscribe = () => {
+      toast.success("Subscribe successfully.")
+      setEmail("")
+   }
    return (
       <footer className="bg-gray-900 text-whiteBg">
          <div className="main-container py-16">
@@ -38,10 +44,12 @@ const Footer = () => {
                   <div className="flex flex-col lg:pt-2 sm:flex-row gap-4 lg:gap-2">
                      <Input
                         type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         placeholder="Enter your email"
                         className="bg-gray-800 text-whiteBg border-gray-700 focus:border-blue-500"
                      />
-                     <Button type="button" onClick={() => toast.success("Subscribe successfully.")} type="button" className="bg-blue-600 hover:bg-blue-700 text-whiteBg">
+                     <Button disabled={email?.length <= 0} type="button" onClick={handleSubscribe} className="bg-blue-600 hover:bg-blue-700 text-whiteBg">
                         Subscribe
                      </Button>
                   </div>

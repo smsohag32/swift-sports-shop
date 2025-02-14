@@ -52,41 +52,40 @@ const Login = () => {
             toast.error("Login failed: ", error.response.data || "Invalid login credentials");
          } else {
             console.log(error)
-            toast.error(error?.message || "Login failed due to an unexpected error");
+            toast.error(error?.message || "Login failed due to server not responding.");
          }
       } finally {
          setIsLoading(false);
       }
    };
    useEffect(() => {
-      console.log("useEffect running...");
 
       // Show cookie policy notification
-      const cookieToast = toast.info(
-         <div>
-            <p>
-               We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.
-            </p>
-            <Button variant="outline" size="sm" onClick={() => toast.dismiss(cookieToast)} className="mt-2">
-               Got it
-            </Button>
-         </div>,
-         {
-            duration: Number.POSITIVE_INFINITY,
-            position: "bottom-right",
-         },
-      );
+      // const cookieToast = toast.info(
+      //    <div>
+      //       <p>
+      //          We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.
+      //       </p>
+      //       <Button variant="outline" size="sm" onClick={() => toast.dismiss(cookieToast)} className="mt-2">
+      //          Got it
+      //       </Button>
+      //    </div>,
+      //    {
+      //       duration: Number.POSITIVE_INFINITY,
+      //       position: "bottom-right",
+      //    },
+      // );
 
       // Show default credentials notification
       toast.info(
          <div>
-            <p className='text-2xl font-normal mb-2'>Default credentials:</p>
+            <p className='text-2xl font-normal mb-2'>Default credentials</p>
             <div className='p-4'>
-               <p>Admin</p>
+               <p className='font-semibold mb-1'>Admin</p>
                <p className='text-base text-gray-800'>Email: sohagsheik32@gmail.com</p>
                <p className='text-base text-gray-800'>Password: 11223344</p>
                <Separator className="my-4" />
-               <p>User</p>
+               <p className='font-semibold mb-1'>User</p>
                <p className='text-base text-gray-800'>Email: sohag@gmail.com</p>
                <p className='text-base text-gray-800'>Password: 11223344</p>
                <Separator className="my-4" />

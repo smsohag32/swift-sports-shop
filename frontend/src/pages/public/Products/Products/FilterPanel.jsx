@@ -47,7 +47,7 @@ const FilterPanel = () => {
             </div>
             {isFilterOpen && (
                <>
-                  <div className="mb-6">
+                  {/* <div className="mb-6">
                      <h3 className="font-semibold mb-2">Filter by Price Range</h3>
                      <Slider
                         value={priceRange}
@@ -60,7 +60,7 @@ const FilterPanel = () => {
                         <span>${priceRange[0]}</span>
                         <span>${priceRange[1]}</span>
                      </div>
-                  </div>
+                  </div> */}
                   {/* <div className="mb-6">
                      <h3 className="font-semibold mb-2">Filter by category</h3>
                      <ScrollArea className="h-[200px] ">

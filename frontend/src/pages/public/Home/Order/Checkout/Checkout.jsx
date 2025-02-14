@@ -106,11 +106,11 @@ export const Checkout = () => {
                            <ArrowLeft className="w-4 h-4 mr-2" /> Back
                         </Button>
                      )}
-                     {currentStep < steps.length - 1 && (
+                     {/* {currentStep < steps.length - 1 && (
                         <Button className="ml-auto" onClick={handleNext}>
                            Next <ArrowRight className="w-4 h-4 ml-2" />
                         </Button>
-                     )}
+                     )} */}
                   </div>
                </CardContent>
             </Card>

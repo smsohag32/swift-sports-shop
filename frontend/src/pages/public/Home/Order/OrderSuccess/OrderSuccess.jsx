@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button"
 import { CheckCircle, ShoppingBag, Truck } from "lucide-react"
+import { useNavigate } from "react-router-dom"
 
 export const OrderSuccess = () => {
+   const navigate = useNavigate()
    return (
       <div className="text-center space-y-6">
          <div className="bg-primary text-primary-foreground rounded-full p-4 inline-block">
@@ -16,7 +18,7 @@ export const OrderSuccess = () => {
                <span>Estimated delivery: 3-5 business days</span>
             </div>
          </div>
-         <Button className="w-full max-w-md">
+         <Button onClick={() => navigate("/products")} className="w-full max-w-md">
             <ShoppingBag className="w-4 h-4 mr-2" />
             Continue Shopping
          </Button>
