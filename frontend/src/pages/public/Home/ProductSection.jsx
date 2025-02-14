@@ -2,6 +2,7 @@
 import ProductCard from "@/components/cards/ProductCard";
 import { useGetAllProductQuery } from "@/redux-store/services/productApi";
 import ProductCardSkeleton from "@/components/skeleton/ProductSkeleton";
+import Empty from "@/components/empty/Empty";
 
 const ProductSection = () => {
    const { data: productData, isLoading } = useGetAllProductQuery();
@@ -22,7 +23,9 @@ const ProductSection = () => {
                      ? filteredProducts.map((product) => (
                         <ProductCard product={product} key={product?._id} />
                      ))
-                     : <div className="col-span-full text-center text-gray-500">No products found.</div>
+                     : <div className="lg:col-span-3">
+                        <Empty message={"No products found."} ></Empty>
+                     </div>
                }
             </div>
          </div>

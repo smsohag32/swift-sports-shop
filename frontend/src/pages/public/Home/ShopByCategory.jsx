@@ -62,7 +62,7 @@ const ShopByCategory = () => {
                   </CarouselNext>
                </Carousel>
             ) : (
-               <Empty message="No data found" />
+               <Empty message="No category found." />
             )}
          </div>
       </section>
