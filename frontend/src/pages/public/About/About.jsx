@@ -10,7 +10,7 @@ const About = () => {
       <div className="bg-gradient-to-b bg-[#ffffff] min-h-screen">
          <div className="main-container pb-16 pt-10">
             <section className="text-center mb-16">
-               <h2 className="text-4xl font-semibold text-title mb-4">Our Story</h2>
+               <h2 className="text-[28px] font-medium text-title mb-4">Our Story</h2>
                <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                   Founded in 2010, Swift Sports Shop has been on a mission to equip athletes and sports enthusiasts with top-quality gear. Our journey began with a passion for sports and a dream to make premium sporting goods accessible to all.
                </p>

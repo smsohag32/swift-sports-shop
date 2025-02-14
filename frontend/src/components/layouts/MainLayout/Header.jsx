@@ -72,7 +72,7 @@ const Header = () => {
 
    return (
       <motion.header
-         className={`fixed w-full py-3  z-50 flex items-center transition-all duration-300 ${isScrolled ? 'shadow-sm bg-white' : 'bg-transparent'}`}
+         className={`fixed w-full py-2  z-50 flex items-center border-b border-b-slate-200 transition-all duration-300 ${isScrolled ? 'shadow-sm bg-white' : 'bg-transparent'}`}
          initial={{ y: -100 }}
          animate={{ y: 0 }}
          transition={{ duration: 0.5 }}

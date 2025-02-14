@@ -36,7 +36,7 @@ const Products = () => {
    }
 
    return (
-      <div className="pt-6 pb-16">
+      <div className="pt-8 pb-16">
          <div className="main-container">
 
             <div className="flex flex-col lg:flex-row gap-8">
