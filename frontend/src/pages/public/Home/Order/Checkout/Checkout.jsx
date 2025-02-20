@@ -60,9 +60,9 @@ export const Checkout = () => {
    }
 
    return (
-      <div className="min-h-screen bg-gray-100 py-12">
-         <div className="container mx-auto px-4">
-            <Card className="w-full max-w-4xl mx-auto shadow-lg">
+      <div className="min-h-screen  py-12">
+         <div className="main-container">
+            <Card className="w-full mx-auto shadow-sm">
                <CardHeader className="bg-slate-100 text-gray-800">
                   <CardTitle className="text-2xl font-bold">
                      {currentStep === 0

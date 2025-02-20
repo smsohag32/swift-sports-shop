@@ -9,14 +9,13 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { useGetAllCategoryQuery } from "@/redux-store/services/categoryApi";
 
 
-const FilterPanel = () => {
+const FilterPanel = ({ selectedCategories, setSelectedCategories }) => {
    const { data: categoryData } = useGetAllCategoryQuery()
    const [priceRange, setPriceRange] = useState([0, 200])
    const [selectedBrands, setSelectedBrands] = useState([])
    const [selectedColors, setSelectedColors] = useState([])
    const [minRating, setMinRating] = useState(0)
    const [isFilterOpen, setIsFilterOpen] = useState(true)
-   const [selectedCategory, setSelectedCategory] = useState([])
    const toggleFilter = () => setIsFilterOpen(!isFilterOpen)
 
    const handleBrandChange = (brand) => {
@@ -25,7 +24,7 @@ const FilterPanel = () => {
       )
    }
    const handleCategoryChange = (category) => {
-      setSelectedCategory(prev =>
+      setSelectedCategories(prev =>
          prev.includes(category) ? prev.filter(b => b !== category) : [...prev, category]
       )
    }
@@ -61,7 +60,7 @@ const FilterPanel = () => {
                         <span>${priceRange[1]}</span>
                      </div>
                   </div> */}
-                  {/* <div className="mb-6">
+                  <div className="mb-6">
                      <h3 className="font-semibold mb-2">Filter by category</h3>
                      <ScrollArea className="h-[200px] ">
                         <div className="grid gap-1">
@@ -69,7 +68,7 @@ const FilterPanel = () => {
                               <div key={category} className="flex items-center space-x-2 mb-2">
                                  <Checkbox
                                     id={`category-${category?._id}`}
-                                    checked={selectedCategory.includes(category?._id)}
+                                    checked={selectedCategories.includes(category?._id)}
                                     onCheckedChange={() => handleCategoryChange(category?._id)}
                                  />
                                  <label htmlFor={`category-${category?._id}`} className="text-sm cursor-pointer font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
@@ -79,7 +78,7 @@ const FilterPanel = () => {
                            ))}
                         </div>
                      </ScrollArea>
-                  </div> */}
+                  </div>
                   <div className="mb-6">
                      <h3 className="font-semibold mb-2">Brand</h3>
                      <ScrollArea className="h-[120px]">

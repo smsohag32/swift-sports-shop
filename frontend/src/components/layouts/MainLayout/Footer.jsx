@@ -49,7 +49,7 @@ const Footer = () => {
                         placeholder="Enter your email"
                         className="bg-gray-800 text-whiteBg border-gray-700 focus:border-blue-500"
                      />
-                     <Button disabled={email?.length <= 0} type="button" onClick={handleSubscribe} className="bg-blue-600 hover:bg-blue-700 text-whiteBg">
+                     <Button disabled={email?.length <= 0} type="button" onClick={handleSubscribe} className="bg-orange-600 hover:bg-orange-700 text-whiteBg">
                         Subscribe
                      </Button>
                   </div>
@@ -80,7 +80,7 @@ const Footer = () => {
 
             {/* Bottom Bar */}
             <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col sm:flex-row justify-between items-center">
-               <p className="text-gray-400 text-sm">&copy; 2024 <span className="">Swift Sports Shop</span>. All rights reserved. & <span>Develop by <a href="https://sohagsheik.vercel.app/" target="_blank" className="font-semibold text-complementaryBlue ps-1">Sohag Sheik</a></span></p>
+               <p className="text-gray-400 text-center lg:text-start text-sm">&copy; 2024 <span className="">Swift Sports Shop</span>. All rights reserved. & <span>Develop by <br className="md:hidden" /> <a href="https://sohagsheik.vercel.app/" target="_blank" className="font-semibold text-darkOrange ps-1">Sohag Sheik</a></span></p>
                <div className="flex space-x-4 mt-4 sm:mt-0">
                   <Link href="/privacy" className="text-gray-400 hover:text-whiteBg text-sm transition-colors">Privacy Policy</Link>
                   <Link href="/terms" className="text-gray-400 hover:text-whiteBg text-sm transition-colors">Terms of Service</Link>

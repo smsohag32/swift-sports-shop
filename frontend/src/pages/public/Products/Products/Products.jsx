@@ -16,6 +16,7 @@ const Products = () => {
    const [searchParams] = useSearchParams();
    const category = searchParams.get("category");
    const [searchText, setSearchText] = useState("")
+   const [selectedCategories, setSelectedCategories] = useState([])
    const [itemPerPage, setItemPerPage] = useState(10)
    const categoryId = searchParams.get("id");
    const { data: productData, error, isLoading } = useSearchProductQuery({
@@ -38,9 +39,8 @@ const Products = () => {
    return (
       <div className="pt-8 pb-16">
          <div className="main-container">
-
             <div className="flex flex-col lg:flex-row gap-8">
-               <FilterPanel />
+               <FilterPanel selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories} />
                <div className="w-full lg:w-3/4">
                   <div className="flex flex-col mb-6 sm:flex-row justify-between items-center gap-4">
                      <div className="text-2xl lg:text-3xl text-gray-800 font-semibold flex items-center space-x-2">
@@ -112,7 +112,6 @@ const Products = () => {
 
                </div>
             </div>
-
          </div>
       </div >
    );

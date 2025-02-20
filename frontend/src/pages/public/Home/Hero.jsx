@@ -20,15 +20,15 @@ const Hero = () => {
                transition={{ duration: 0.8 }}
                className="w-full"
             >
-               <h1 className="text-4xl lg:text-6xl text-center lg:text-start font-medium text-title mb-4">
-                  <span className='text-primaryOrange'>SWIFT</span> SPORTS <span className=''>SHOP</span>
+               <h1 className="text-4xl lg:text-6xl text-center lg:text-start text-title  font-medium  mb-6">
+                  <span className='text-primaryOrange'>S</span>wift Sports <span className='text-primaryOrange'>Shop</span>
                </h1>
                <p className="text-xl font-normal text-des text-center lg:text-start lg:text-xl mb-8">
                   Discover Top-Tier Sports Gear – Shop Now for Exclusive Deals on Premium Equipment and Apparel!
                </p>
 
                <div className="flex flex-col sm:flex-row gap-4 mb-12">
-                  <Button onClick={() => navigate("/products")} size="lg" className="bg-white text-primaryOrange  hover:bg-orange-50 ">
+                  <Button onClick={() => navigate("/products")} size="lg" className="bg-white text-primaryOrange border-orange-200 border  hover:bg-orange-50 ">
                      Shop Now <ShoppingCart className="ml-2 h-5 w-5" />
                   </Button>
 
@@ -39,8 +39,8 @@ const Hero = () => {
                   <FeatureItem icon={Zap} text="Fast Delivery" />
                </div>
             </motion.div>
-            <div className=" flex items-center    w-full pt-16 lg:pt-0 lg:justify-center relative">
-               <div className='lg:w-full w-4/5'>
+            <div className=" flex items-center    w-full  pt-0 justify-center relative">
+               <div className='lg:w-full w-full flex items-center justify-center  opacity-80'>
                   <motion.img initial={{ opacity: 1, scale: 0.8, rotateY: 0 }}
                      // animate={{
                      //    opacity: 1,
@@ -74,7 +74,7 @@ const FeatureItem = ({ icon: Icon, text }) => (
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.8 }}
    >
-      <Icon className="mr-2 h-6 w-6" />
+      <Icon className="mr-2 h-6 w-6 text-darkOrange" />
       <span className='text-[10px] lg:text-sm whitespace-nowrap'>{text}</span>
    </motion.div>
 )

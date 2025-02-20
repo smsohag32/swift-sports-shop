@@ -11,8 +11,8 @@ const WhyChoose = () => {
                {features.map((feature, index) => (
                   <Card key={index} className="text-center">
                      <CardHeader>
-                        <div className="mx-auto bg-blue-100 rounded-full p-3 w-16 h-16 flex items-center justify-center">
-                           <feature.icon className="w-8 h-8 text-blue-600" />
+                        <div className="mx-auto bg-orange-50 rounded-full p-3 w-16 h-16 flex items-center justify-center">
+                           <feature.icon className="w-8 h-8 text-orange-600" />
                         </div>
                      </CardHeader>
                      <CardContent>

@@ -37,7 +37,7 @@ export function ProfileMenu() {
          <DropdownMenuTrigger asChild className="w-full cursor-pointer px-2 py-2 bg-titleBg rounded-[2px]">
             <div className="flex items-center justify-between gap-2">
                <div className="flex items-center gap-2">
-                  <UserAvatar size={"md"} className="bg-blue-500 text-white" name={formatName(user?.name?.slice(0, 13))} />
+                  <UserAvatar size={"md"} className="bg-darkOrange text-white" name={formatName(user?.name?.slice(0, 13))} />
                   <span className="lg:flex hidden flex-col text-base ">
                      {formatName((user?.name?.slice(0, 13)) || "Sohag Sheik")} ...
                      <span className="text-xs hidden lg:block font-normal  text-[#B4B4B4]">
