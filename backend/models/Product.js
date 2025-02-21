@@ -26,6 +26,11 @@ const productSchema = new mongoose.Schema({
          enum: ["S", "M", "L", "XL", "XXL"],
       },
    ],
+   features: [
+      {
+         type: String,
+      },
+   ],
    colors: [
       {
          type: String,
@@ -33,7 +38,7 @@ const productSchema = new mongoose.Schema({
    ],
    stock: {
       type: Number,
-   required: true,
+      required: true,
       min: 0,
    },
    category: {

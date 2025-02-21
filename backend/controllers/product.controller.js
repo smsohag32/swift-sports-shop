@@ -43,20 +43,33 @@ export const getProducts = async (req, res) => {
 
 export const searchProduct = async (req, res) => {
    try {
-      let { categoryId, searchText, isAscending, brand, sortBy } = req.query;
-      let { itemPerPage = 10, page = 1 } = req.query;
+      let {
+         categoryId,
+         categoryIds,
+         searchText,
+         isAscending,
+         brand,
+         sortBy,
+         itemPerPage = 10,
+         page = 1,
+      } = req.query;
 
       itemPerPage = Math.max(1, parseInt(itemPerPage));
       page = Math.max(1, parseInt(page));
 
       let filter = { status: "active" };
 
-      // Validate and apply category filter
-      if (categoryId) {
-         if (!mongoose.Types.ObjectId.isValid(categoryId)) {
-            return res.status(400).json({ message: "Invalid category ID format." });
-         }
-         filter.category = new mongoose.Types.ObjectId(categoryId);
+      // ✅ Accept multiple category IDs from `categoryIds` array or `categoryId` string
+      if (categoryIds) {
+         categoryIds = Array.isArray(categoryIds) ? categoryIds : categoryIds.split(",");
+      } else if (categoryId) {
+         categoryIds = [categoryId];
+      }
+
+      categoryIds = categoryIds?.filter((id) => mongoose.Types.ObjectId.isValid(id));
+
+      if (categoryIds?.length > 0) {
+         filter.category = { $in: categoryIds.map((id) => new mongoose.Types.ObjectId(id)) };
       }
 
       if (brand) filter.brand = brand;
