@@ -13,6 +13,8 @@ const ProductCard = ({ product }) => {
    const navigate = useNavigate()
    const isInCart = cartItems.some((item) => item._id === product._id);
 
+   
+
    const handleAddToCart = async () => {
       try {
          if (!isInCart) {
@@ -55,7 +57,7 @@ const ProductCard = ({ product }) => {
             </div>
          </div>
          <CardContent className="p-4">
-            <Link to={`/products/details/${product?._id}`} className="text-lg font-semibold text-gray-800  mb-2 truncate">{product.name}</Link>
+            <Link to={`/products/details/${product?._id}`} className="text-lg font-semibold text-gray-800  mb-2 line-clamp-1">{product.name}</Link>
             <p className="text-sm text-gray-500 mb-2 truncate">{product.brand}</p>
             <div className="flex justify-between items-center">
                <span className="text-xl font-bold text-primary">${product.price.toFixed(2)}</span>

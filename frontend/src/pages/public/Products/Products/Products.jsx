@@ -1,7 +1,6 @@
 
 import ProductCard from "@/components/cards/ProductCard";
 import { useSearchProductQuery } from "@/redux-store/services/productApi";
-
 import ProductCardSkeleton from "@/components/skeleton/ProductSkeleton";
 import { Link, useSearchParams } from "react-router-dom";
 import { formatName } from "@/utils/helper";
@@ -25,6 +24,7 @@ const Products = () => {
       itemPerPage: itemPerPage,
       page: 1,
       ...(categoryId ? { categoryId } : category ? { category } : {}),
+      categoryIds: selectedCategories.length > 0 ? selectedCategories : undefined, // ✅ Send array, not string
    });
 
    const filteredProducts = productData?.products

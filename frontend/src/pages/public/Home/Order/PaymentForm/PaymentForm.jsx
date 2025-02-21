@@ -58,19 +58,21 @@ export const PaymentForm = ({ onSubmit }) => {
             </div>
          )}
 
-         <Button type="submit" className="w-full">
-            {paymentMethod === "card" ? (
-               <>
-                  <CreditCard className="w-4 h-4 mr-2" />
-                  Pay Securely
-               </>
-            ) : (
-               <>
-                  <Banknote className="w-4 h-4 mr-2" />
-                  Confirm Cash on Delivery
-               </>
-            )}
-         </Button>
+         <div className="flex items-center justify-center">
+            <Button type="submit" className="w-full max-w-sm mx-auto">
+               {paymentMethod === "card" ? (
+                  <>
+                     <CreditCard className="w-4 h-4 mr-2" />
+                     Pay Securely
+                  </>
+               ) : (
+                  <>
+                     <Banknote className="w-4 h-4 mr-2" />
+                     Confirm Cash on Delivery
+                  </>
+               )}
+            </Button>
+         </div>
       </form>
    )
 }

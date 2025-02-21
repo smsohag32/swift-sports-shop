@@ -81,7 +81,7 @@ export const Checkout = () => {
                </CardHeader>
                <CardContent className="p-6">
                   <div className="mb-8">
-                     <Progress value={(currentStep / (steps.length - 1)) * 100} className="w-full h-2" />
+                     <Progress value={(currentStep / (steps.length - 1)) * 100} className="w-full opacity-70 h-2" />
                   </div>
                   <div className="flex justify-between mb-8">
                      {steps.map((step, index) => (
@@ -91,7 +91,7 @@ export const Checkout = () => {
                               }`}
                         >
                            <div
-                              className={`rounded-full p-2 ${index <= currentStep ? "bg-primary text-primary-foreground" : "bg-muted"}`}
+                              className={`rounded-full p-2 ${index <= currentStep ? "bg-orange-50 text-primary" : "bg-muted"}`}
                            >
                               <step.icon className="w-6 h-6" />
                            </div>

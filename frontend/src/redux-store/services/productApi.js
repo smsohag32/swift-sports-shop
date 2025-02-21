@@ -16,6 +16,7 @@ const productApi = apiSlice.injectEndpoints({
             category,
             brand,
             sortBy,
+            categoryIds,
             itemPerPage = 10,
             page = 1,
          }) => ({
@@ -26,6 +27,7 @@ const productApi = apiSlice.injectEndpoints({
                isAscending,
                category,
                brand,
+               categoryIds,
                sortBy,
                itemPerPage,
                page,
