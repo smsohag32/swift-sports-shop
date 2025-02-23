@@ -1,6 +1,6 @@
 import React from 'react'
 import { useForm } from "react-hook-form"
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { User, Mail, Phone, Lock, ArrowRight } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -10,11 +10,11 @@ import Logo from '@/assets/svg/Logo'
 import { useRegisterUserMutation } from '@/redux-store/services/userApi'
 
 const RegistrationPage = () => {
-   const { register, handleSubmit, formState: { errors, isValid }, watch } = useForm({
+   const { register, handleSubmit, formState: { errors, isValid }, watch, reset } = useForm({
       mode: 'onChange'
    })
    const [registerUser, { isLoading }] = useRegisterUserMutation()
-
+   const navigate = useNavigate()
    const onSubmit = async (data) => {
 
       try {
@@ -28,7 +28,8 @@ const RegistrationPage = () => {
          }
          const res = await registerUser(newUser).unwrap()
          toast.success("Registration successful!")
-
+         reset()
+         navigate("/login")
       } catch (error) {
          toast.error("Registration failed: " + error.message)
       }
